@@ -1,16 +1,5 @@
-# LagGoggles <img height="70" src="docs/logo.png">
+# LagGoggles Legacy <img height="70" src="docs/logo.png">
 Intuitive lag hunting!<br>
-<br>
-# I am currently working on a complete rewrite of this mod with added functionality.
-The planned _main_ functionality is listed below:
-* **Throttling block ticking based upon tps**, PER PLAYER. This means that every player gets an equal share of tick time on his/her machines. Needs performance testing to see if this is viable. TileEntities will be assigned owners when placed or claimed by a player.
-* **Network profiling**, monitor in and outgoing bytes
-* **Browser interface instead of in-game**. Allows for multi monitor setups and much more space to fit content in a proper manner.
-
-If you have suggestions, I will take them into consideration.
-<br>
-<br>
-<br>
 LagGoggles is a profiler where you can see timings in the world, visually. It comes with a custom GUI using a configurable keybind. It's compatible with [SpongeForge](https://github.com/SpongePowered/SpongeForge) and [Mixin](https://github.com/SpongePowered/Mixin)!<br>
 You can use LagGoggles as a player too! This is my attempt to create an understanding of what causes lag on a server to regular players.<br>
 I noticed some common misconceptions like having machines spread out over different chunks causes less lag than putting it in one chunk.<br>

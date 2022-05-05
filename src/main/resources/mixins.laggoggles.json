@@ -1,17 +1,17 @@
 {
-  "package": "cf.terminator.laggoggles.mixin",
+  "package": "com.falsepattern.laggoggles.mixin",
   "refmap": "mixins.laggoggles.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.6.0",
-  "plugin": "cf.terminator.laggoggles.mixinhelper.MixinConfigPlugin",
+  "plugin": "com.falsepattern.laggoggles.mixinhelper.MixinConfigPlugin",
   "mixins": [
-    "MixinWorld",
-    "MixinEntity",
-    "MixinWorldServerSponge",
-    "MixinWorldServerForge",
-    "MixinEventBus",
-    "MixinASMEventHandler",
-    "MixinTileEntityRendererDispatcher",
-    "MixinRenderManager"
+    "com.falsepattern.laggoggles.mixin.MixinWorld",
+    "com.falsepattern.laggoggles.mixin.MixinEntity",
+    "com.falsepattern.laggoggles.mixin.MixinWorldServerSponge",
+    "com.falsepattern.laggoggles.mixin.MixinWorldServerForge",
+    "com.falsepattern.laggoggles.mixin.MixinEventBus",
+    "com.falsepattern.laggoggles.mixin.MixinASMEventHandler",
+    "com.falsepattern.laggoggles.mixin.MixinTileEntityRendererDispatcher",
+    "com.falsepattern.laggoggles.mixin.MixinRenderManager"
   ]
 }
