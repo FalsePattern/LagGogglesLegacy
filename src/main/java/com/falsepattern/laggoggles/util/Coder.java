@@ -1,7 +1,7 @@
 package com.falsepattern.laggoggles.util;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 import java.util.UUID;
 

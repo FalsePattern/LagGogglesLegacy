@@ -5,8 +5,8 @@ import com.falsepattern.laggoggles.client.gui.GuiScanResultsWorld;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.TimingManager;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import static com.falsepattern.laggoggles.util.Graphical.mu;
 

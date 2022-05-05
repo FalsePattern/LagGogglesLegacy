@@ -2,10 +2,10 @@ package com.falsepattern.laggoggles.server;
 
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
 import com.falsepattern.laggoggles.packet.SPacketServerData;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.ArrayList;
 import java.util.UUID;

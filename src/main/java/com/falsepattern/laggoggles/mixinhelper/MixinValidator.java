@@ -2,7 +2,7 @@ package com.falsepattern.laggoggles.mixinhelper;
 
 import com.falsepattern.laggoggles.Main;
 import net.minecraft.launchwrapper.LaunchClassLoader;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 import java.util.HashMap;
 import java.util.HashSet;

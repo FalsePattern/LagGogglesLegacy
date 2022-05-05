@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.util;
 
-import net.minecraftforge.fml.common.ModContainer;
+import cpw.mods.fml.common.ModContainer;
 
 public interface ASMEventHandler {
     ModContainer getOwner();

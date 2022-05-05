@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.mixinhelper.extended;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 import org.spongepowered.asm.obfuscation.mapping.common.MappingField;

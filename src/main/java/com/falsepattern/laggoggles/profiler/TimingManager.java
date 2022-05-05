@@ -2,7 +2,7 @@ package com.falsepattern.laggoggles.profiler;
 
 import com.falsepattern.laggoggles.util.ThreadChecker;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;

@@ -2,7 +2,7 @@ package com.falsepattern.laggoggles.mixinhelper;
 
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.mixinhelper.extended.DynamicMethodReplacer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.tree.ClassNode;
@@ -43,7 +43,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin{
             MIXIN_CONFIG_PLUGIN_WAS_LOADED = true;
 
             for(StackTraceElement element : Thread.currentThread().getStackTrace()){
-                if(element.getClassName().equals("net.minecraftforge.fml.relauncher.ServerLaunchWrapper")){
+                if(element.getClassName().equals("cpw.mods.fml.relauncher.ServerLaunchWrapper")){
                     hasClientClasses = false;
                     break;
                 }else if(element.getClassName().equals("GradleStartServer")){

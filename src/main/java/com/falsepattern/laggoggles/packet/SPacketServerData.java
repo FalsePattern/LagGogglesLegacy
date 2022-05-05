@@ -4,7 +4,7 @@ import com.falsepattern.laggoggles.server.ServerConfig;
 import com.falsepattern.laggoggles.util.Perms;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class SPacketServerData implements IMessage {
 

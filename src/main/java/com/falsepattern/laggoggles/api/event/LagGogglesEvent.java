@@ -1,7 +1,7 @@
 package com.falsepattern.laggoggles.api.event;
 
 import com.falsepattern.laggoggles.profiler.ProfileResult;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event;
 
 public class LagGogglesEvent extends Event {
 

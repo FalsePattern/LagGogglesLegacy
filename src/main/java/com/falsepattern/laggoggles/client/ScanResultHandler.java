@@ -8,9 +8,9 @@ import com.falsepattern.laggoggles.packet.SPacketScanResult;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.util.Calculations;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.ArrayList;
 

@@ -2,11 +2,11 @@ package com.falsepattern.laggoggles.mixin;
 
 import com.falsepattern.laggoggles.util.ASMEventHandler;
 import com.google.common.base.Throwables;
-import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventBus;
-import net.minecraftforge.fml.common.eventhandler.IEventExceptionHandler;
-import net.minecraftforge.fml.common.eventhandler.IEventListener;
+import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.EventBus;
+import cpw.mods.fml.common.eventhandler.IEventExceptionHandler;
+import cpw.mods.fml.common.eventhandler.IEventListener;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
