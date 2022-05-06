@@ -33,9 +33,9 @@ public class GuiScanResultsWorld extends GuiScreen {
         super.initGui();
 
         /*                                            width  , height              , top                   , bottom         , left      , screenWidth, screenHeight, ProfileResult*/
-        guiSingleEntities = new GuiSingleEntities(mc, width/2, height - 25         , 45                    , height         ,  0        , width      , height      , result);
-        guiEntityTypes    = new GuiEntityTypes(   mc, width/2, (height - 25)/2     , 45                    , (height - 25)/2,  width/2  , width      , height      , result);
-        guiEventTypes     = new GuiEventTypes(    mc, width/2, (height - 25)/2 - 12, ((height - 25)/2) + 12, height         ,  width/2  , width      , height      , result);
+        guiSingleEntities = new GuiSingleEntities(mc, width/2, height - 25         , 45                    , height         ,  0, result);
+        guiEntityTypes    = new GuiEntityTypes(   mc, width/2, (height - 25)/2     , 45                    , (height - 25)/2,  width/2, result);
+        guiEventTypes     = new GuiEventTypes(    mc, width/2, (height - 25)/2 - 12, ((height - 25)/2) + 12, height         ,  width/2, result);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GuiScanResultsWorld extends GuiScreen {
 
 
     @Override
-    public void handleMouseInput() throws IOException{
+    public void handleMouseInput() {
         super.handleMouseInput();
         guiSingleEntities.handleMouseInput();
         guiEntityTypes.handleMouseInput();
@@ -69,7 +69,7 @@ public class GuiScanResultsWorld extends GuiScreen {
     }
 
     private void drawString(String text, int x, int y, int color) {
-        FONTRENDERER.drawStringWithShadow(text, (float) x, (float)y, color);
+        FONTRENDERER.drawStringWithShadow(text,  x, y, color);
     }
 
 

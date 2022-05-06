@@ -21,7 +21,7 @@ public class RequestResultHandler implements IMessageHandler<CPacketRequestResul
 
     @Override
     public IMessage onMessage(CPacketRequestResult CPacketRequestResult, MessageContext ctx) {
-        EntityPlayerMP player = ctx.getServerHandler().player;
+        EntityPlayerMP player = ctx.getServerHandler().playerEntity;
 
         if(Perms.getPermission(player).ordinal() < Perms.Permission.GET.ordinal()){
             return new SPacketMessage("No permission");

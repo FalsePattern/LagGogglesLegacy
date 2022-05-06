@@ -10,8 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import com.falsepattern.lib.compat.BlockPos;
+import com.falsepattern.lib.compat.ChunkPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -80,7 +80,7 @@ public class LagOverlayGui {
         this.result = data;
         this.type = result.getType();
         MINECRAFT = Minecraft.getMinecraft();
-        RENDER_MANAGER = MINECRAFT.getRenderManager();
+        RENDER_MANAGER = RenderManager.instance;
         FONT_RENDERER = MINECRAFT.fontRenderer;
         this.quickText = new QuickText(result.getType().getText(result));
         scanAndAddEntities();
@@ -106,7 +106,7 @@ public class LagOverlayGui {
         ENTITY_NANO.clear();
         ENTITY_HEAT.clear();
         CHUNKS.clear();
-        if(MINECRAFT.isGamePaused() || MINECRAFT.world == null || MINECRAFT.world.loadedEntityList == null){
+        if(MINECRAFT.isGamePaused() || MINECRAFT.theWorld == null || MINECRAFT.theWorld.loadedEntityList == null){
             return;
         }
         if(type == ScanType.WORLD){
@@ -116,11 +116,11 @@ public class LagOverlayGui {
                 switch (objectData.type){
                     case TILE_ENTITY:
                     case BLOCK:
-                        if((int) objectData.getValue(ObjectData.Entry.WORLD_ID) != MINECRAFT.world.provider.getDimension()){
+                        if((int) objectData.getValue(ObjectData.Entry.WORLD_ID) != MINECRAFT.theWorld.provider.dimensionId){
                             continue;
                         }
                         BlockPos pos = new BlockPos(objectData.getValue(ObjectData.Entry.BLOCK_POS_X), objectData.getValue(ObjectData.Entry.BLOCK_POS_Y), objectData.getValue(ObjectData.Entry.BLOCK_POS_Z));
-                        if(MINECRAFT.player.getDistanceSq(pos) > 36864){
+                        if(MINECRAFT.thePlayer.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > 36864){
                             /* More than 12 chunks away, we don't draw. */
                             continue;
                         }
@@ -140,13 +140,13 @@ public class LagOverlayGui {
 
                         break;
                     case ENTITY:
-                        if((int) objectData.getValue(ObjectData.Entry.WORLD_ID) != MINECRAFT.world.provider.getDimension()){
+                        if((int) objectData.getValue(ObjectData.Entry.WORLD_ID) != MINECRAFT.theWorld.provider.dimensionId) {
                             continue;
                         }
                         UUID entityID = objectData.getValue(ObjectData.Entry.ENTITY_UUID);
-                        for(Entity entity : new ArrayList<>(MINECRAFT.world.loadedEntityList)){
+                        for(Entity entity : new ArrayList<Entity>(MINECRAFT.theWorld.loadedEntityList)){
                             if(entity.getPersistentID().equals(entityID)){
-                                if(entity == MINECRAFT.player){
+                                if(entity == MINECRAFT.thePlayer){
                                     continue;
                                 }
                                 ENTITY_NANO.put(entity, Calculations.muPerTickString(nanos, result));
@@ -170,9 +170,9 @@ public class LagOverlayGui {
                         break;
                     case GUI_ENTITY:
                         UUID entityID = objectData.getValue(ObjectData.Entry.ENTITY_UUID);
-                        for (Entity entity : new ArrayList<>(MINECRAFT.world.loadedEntityList)) {
+                        for (Entity entity : new ArrayList<Entity>(MINECRAFT.theWorld.loadedEntityList)) {
                             if (entity.getPersistentID().equals(entityID)) {
-                                if (entity == MINECRAFT.player) {
+                                if (entity == MINECRAFT.thePlayer) {
                                     continue;
                                 }
                                 ENTITY_HEAT.put(entity, Calculations.heatNF(nanos, result));
@@ -253,10 +253,10 @@ public class LagOverlayGui {
 
     @SubscribeEvent
     public void onDraw(RenderWorldLastEvent event){
-        float partialTicks = event.getPartialTicks();
-        double pX = MINECRAFT.player.prevPosX + (MINECRAFT.player.posX - MINECRAFT.player.prevPosX) * partialTicks;
-        double pY = MINECRAFT.player.prevPosY + (MINECRAFT.player.posY - MINECRAFT.player.prevPosY) * partialTicks;
-        double pZ = MINECRAFT.player.prevPosZ + (MINECRAFT.player.posZ - MINECRAFT.player.prevPosZ) * partialTicks;
+        float partialTicks = event.partialTicks;
+        double pX = MINECRAFT.thePlayer.prevPosX + (MINECRAFT.thePlayer.posX - MINECRAFT.thePlayer.prevPosX) * partialTicks;
+        double pY = MINECRAFT.thePlayer.prevPosY + (MINECRAFT.thePlayer.posY - MINECRAFT.thePlayer.prevPosY) * partialTicks;
+        double pZ = MINECRAFT.thePlayer.prevPosZ + (MINECRAFT.thePlayer.posZ - MINECRAFT.thePlayer.prevPosZ) * partialTicks;
 
         /* Prepare */
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
@@ -393,7 +393,7 @@ public class LagOverlayGui {
             GL11.glBegin(GL11.GL_QUADS);
             String text = e.getValue();
             if(entity.isDead){
-                text = text + " (" + entity.getName() + ")";
+                text = text + " (" + entity.getCommandSenderName() + ")"; //TODO
             }
             int width_plus_2 = FONT_RENDERER.getStringWidth(text) + 2;
             int height_div_2_plus_1 = (FONT_RENDERER.FONT_HEIGHT/2) + 1;

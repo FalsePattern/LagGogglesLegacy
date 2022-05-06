@@ -25,11 +25,11 @@ public class ScanRequestHandler implements IMessageHandler<CPacketRequestScan, I
 
     @Override
     public IMessage onMessage(CPacketRequestScan request, MessageContext ctx) {
-        final EntityPlayerMP requestee = ctx.getServerHandler().player;
+        final EntityPlayerMP requestee = ctx.getServerHandler().playerEntity;
         Perms.Permission requesteePerms = Perms.getPermission(requestee);
 
         if(requesteePerms.ordinal() < Perms.Permission.START.ordinal()){
-            Main.LOGGER.info(requestee.getName() + " Tried to start the profiler, but was denied to do so!");
+            Main.LOGGER.info(requestee.getDisplayName() + " Tried to start the profiler, but was denied to do so!");
             return new SPacketMessage("No permission");
         }
 
@@ -61,7 +61,7 @@ public class ScanRequestHandler implements IMessageHandler<CPacketRequestScan, I
                 Profiler.runProfiler(request.length, ScanType.WORLD, requestee);
 
                 /* Send status to users */
-                SPacketProfileStatus status2 = new SPacketProfileStatus(false, request.length, requestee.getName());
+                SPacketProfileStatus status2 = new SPacketProfileStatus(false, request.length, requestee.getDisplayName());
                 for(EntityPlayerMP user : Perms.getLagGogglesUsers()) {
                     CommonProxy.sendTo(status2, user);
                 }

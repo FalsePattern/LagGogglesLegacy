@@ -26,10 +26,10 @@ public class DonateButton extends GuiButton {
     }
 
     @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partial) {
-        super.drawButton(mc, mouseX, mouseY, partial);
+    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+        super.drawButton(mc, mouseX, mouseY);
         mc.getTextureManager().bindTexture(DONATE_TEXTURE);
-        drawModalRectWithCustomSizedTexture(x+3,y+3,0,0,14,14,14,14);
+        drawTexturedModalRect(xPosition + 3, yPosition + 3, 0, 0, 14, 14);
     }
 
 

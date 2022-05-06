@@ -21,9 +21,9 @@ public class RequestDataHandler implements IMessageHandler<CPacketRequestServerD
 
     @Override
     public SPacketServerData onMessage(CPacketRequestServerData cPacketRequestServerData, MessageContext ctx){
-        if(playersWithLagGoggles.contains(ctx.getServerHandler().player.getGameProfile().getId()) == false) {
-            playersWithLagGoggles.add(ctx.getServerHandler().player.getGameProfile().getId());
+        if(!playersWithLagGoggles.contains(ctx.getServerHandler().playerEntity.getGameProfile().getId())) {
+            playersWithLagGoggles.add(ctx.getServerHandler().playerEntity.getGameProfile().getId());
         }
-        return new SPacketServerData(ctx.getServerHandler().player);
+        return new SPacketServerData(ctx.getServerHandler().playerEntity);
     }
 }

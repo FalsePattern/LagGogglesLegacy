@@ -28,7 +28,7 @@ import java.util.List;
 
 public class CommonProxy {
 
-    public static final SimpleNetworkWrapper NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Main.MODID);
+    public static final SimpleNetworkWrapper NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MODID);
 
     private byte PACKET_ID = 0;
 

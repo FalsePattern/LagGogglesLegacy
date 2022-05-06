@@ -4,9 +4,9 @@ import com.falsepattern.laggoggles.client.gui.GuiScanResultsWorld;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.packet.SPacketScanResult;
 import com.falsepattern.laggoggles.util.Side;
+import com.falsepattern.lib.text.FormattedText;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.EnumChatFormatting;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -174,7 +174,7 @@ public class ProfileResult {
     public List<SPacketScanResult> createPackets(EntityPlayerMP player){
         ArrayList<SPacketScanResult> list = new ArrayList<>();
         ArrayList<ObjectData> data = new ArrayList<>(OBJECT_DATA);
-        player.sendMessage(new TextComponentString(TextFormatting.GRAY + "LagGoggles" + TextFormatting.WHITE + ": Generating the results for you..."));
+        FormattedText.parse(EnumChatFormatting.GRAY + "LagGoggles" + EnumChatFormatting.WHITE + ": Generating the results for you...").addChatMessage(player);
         long time = System.currentTimeMillis();
         double dataSize = data.size();
         while(data.size() > 0) {
@@ -194,13 +194,13 @@ public class ProfileResult {
             list.add(packet);
             if(time + 5000 < System.currentTimeMillis()){
                 time = System.currentTimeMillis();
-                player.sendMessage(new TextComponentString(TextFormatting.GRAY + "LagGoggles" + TextFormatting.WHITE + ": result is processing: " + Math.round(100 - (int) ((double) data.size()/dataSize * 100d)) + "%"));
+                FormattedText.parse(EnumChatFormatting.GRAY + "LagGoggles" + EnumChatFormatting.WHITE + ": result is processing: " + Math.round(100 - (int) ((double) data.size()/dataSize * 100d)) + "%").addChatMessage(player);
             }
         }
         if(list.size() >= 1) {
             list.get(list.size() - 1).hasMore = false;
         }
-        player.sendMessage(new TextComponentString(TextFormatting.GRAY + "LagGoggles" + TextFormatting.WHITE + ": Done!"));
+        FormattedText.parse(EnumChatFormatting.GRAY + "LagGoggles" + EnumChatFormatting.WHITE + ": Done!").addChatMessage(player);
         return list;
     }
 

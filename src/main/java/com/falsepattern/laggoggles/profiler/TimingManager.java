@@ -1,7 +1,7 @@
 package com.falsepattern.laggoggles.profiler;
 
 import com.falsepattern.laggoggles.util.ThreadChecker;
-import net.minecraft.util.math.BlockPos;
+import com.falsepattern.lib.compat.BlockPos;
 import cpw.mods.fml.common.eventhandler.Event;
 
 import java.util.*;

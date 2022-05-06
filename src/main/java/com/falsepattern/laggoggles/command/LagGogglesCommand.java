@@ -10,39 +10,40 @@ import com.falsepattern.laggoggles.server.RequestResultHandler;
 import com.falsepattern.laggoggles.server.ScanRequestHandler;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.util.ClickableLink;
+import com.falsepattern.lib.text.FormattedText;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 public class LagGogglesCommand extends CommandBase {
-
     @Override
-    public boolean checkPermission(MinecraftServer server, ICommandSender sender){
-        return true;
+    public int getRequiredPermissionLevel() {
+        return 0;
     }
 
     @Override
-    public String getName() {
+    public String getCommandName() {
         return Main.MODID.toLowerCase();
     }
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/" + getName();
+    public String getCommandUsage(ICommandSender sender) {
+        return "/" + getCommandName();
     }
 
+    @SuppressWarnings("NoTranslation") //TODO
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void processCommand(ICommandSender sender, String[] args) {
         if(args.length == 2 && args[0].equalsIgnoreCase("start")){
-            if(hasPerms(sender, Perms.Permission.START) == false){
+            if(!hasPerms(sender, Perms.Permission.START)){
                 throw new CommandException("You don't have permission to do this!");
             }
-            final int seconds = parseInt(args[1]);
-            if(Profiler.canProfile() == false){
+            final int seconds = parseInt(sender, args[1]);
+            if(!Profiler.canProfile()){
                 throw new CommandException("Profiler is already running.");
             }
             if(sender instanceof EntityPlayerMP && hasPerms(sender, Perms.Permission.FULL) == false){
@@ -55,24 +56,24 @@ public class LagGogglesCommand extends CommandBase {
                 @Override
                 public void run() {
                     Profiler.runProfiler(seconds, ScanType.WORLD, sender);
-                    sender.sendMessage(new TextComponentString(TextFormatting.GRAY + Main.MODID + TextFormatting.WHITE + ": You can see results using /" + getName() +" dump"));
+                    FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": You can see results using /" + getCommandName() + " dump").addChatMessage(sender);
                 }
             }).start();
             return;
         }
         if(args.length == 1 && args[0].equalsIgnoreCase("dump")){
-            if(hasPerms(sender, Perms.Permission.GET) == false){
+            if(!hasPerms(sender, Perms.Permission.GET)){
                 throw new CommandException("You don't have permission to do this!");
             }
             dump(sender);
             return;
         }
-        sender.sendMessage(new TextComponentString(TextFormatting.GRAY + "Running LagGoggles version: " + TextFormatting.GREEN + Main.VERSION));
-        sender.sendMessage(ClickableLink.getLink("https://minecraft.curseforge.com/projects/laggoggles"));
-        sender.sendMessage(new TextComponentString(""));
-        sender.sendMessage(new TextComponentString(TextFormatting.GRAY + "Available arguments:"));
-        sender.sendMessage(new TextComponentString(TextFormatting.GRAY + "/" + getName() + " " +TextFormatting.WHITE + "start <seconds>"));
-        sender.sendMessage(new TextComponentString(TextFormatting.GRAY + "/" + getName() + " " +TextFormatting.WHITE + "dump"));
+        FormattedText.parse(EnumChatFormatting.GRAY + "Running LagGoggles version: " + EnumChatFormatting.GREEN + Main.VERSION).addChatMessage(sender);
+        sender.addChatMessage(ClickableLink.getLink("https://minecraft.curseforge.com/projects/laggoggles"));
+        sender.addChatMessage(new ChatComponentText(""));
+        FormattedText.parse(EnumChatFormatting.GRAY + "Available arguments:").addChatMessage(sender);
+        FormattedText.parse(EnumChatFormatting.GRAY + "/" + getCommandName() + " " +EnumChatFormatting.WHITE + "start <seconds>").addChatMessage(sender);
+        FormattedText.parse(EnumChatFormatting.GRAY + "/" + getCommandName() + " " +EnumChatFormatting.WHITE + "dump").addChatMessage(sender);
     }
 
     private boolean hasPerms(ICommandSender sender, Perms.Permission permission){
@@ -86,6 +87,7 @@ public class LagGogglesCommand extends CommandBase {
         }
     }
 
+    @SuppressWarnings("NoTranslation")
     private void dump(ICommandSender sender) throws CommandException{
         ProfileResult fullResult = Profiler.getLatestResult();
         if(fullResult == null){
@@ -116,7 +118,7 @@ public class LagGogglesCommand extends CommandBase {
             }
         }
         if(has == false){
-            sender.sendMessage(new TextComponentString("None"));
+            FormattedText.parse("None").addChatMessage(sender);
         }
         has = false;
         title(sender, "TILE ENTITIES");
@@ -127,7 +129,7 @@ public class LagGogglesCommand extends CommandBase {
             }
         }
         if(has == false){
-            sender.sendMessage(new TextComponentString("None"));
+            FormattedText.parse("None").addChatMessage(sender);
         }
         has = false;
         title(sender, "BLOCKS");
@@ -138,7 +140,7 @@ public class LagGogglesCommand extends CommandBase {
             }
         }
         if(has == false){
-            sender.sendMessage(new TextComponentString("None"));
+            FormattedText.parse("None").addChatMessage(sender);
         }
         has = false;
         title(sender, "EVENTS");
@@ -149,18 +151,18 @@ public class LagGogglesCommand extends CommandBase {
             }
         }
         if(has == false){
-            sender.sendMessage(new TextComponentString("None"));
+            FormattedText.parse("None").addChatMessage(sender);
         }
         title(sender, "END");
-        sender.sendMessage(new TextComponentString("Results printed, copy your log."));
+        FormattedText.parse("Results printed, copy your log.").addChatMessage(sender);
     }
 
     private void msg(ICommandSender sender, String key, Object value){
-        sender.sendMessage(new TextComponentString(key + ": " + value));
+        FormattedText.parse(key + ": " + value).addChatMessage(sender);
     }
 
     private void title(ICommandSender sender, String title){
-        sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "---[ " + title + " ]---"));
+        FormattedText.parse(EnumChatFormatting.GREEN + "---[ " + title + " ]---").addChatMessage(sender);
     }
 
     private static String muPerTickString(long nanos, ProfileResult result) {

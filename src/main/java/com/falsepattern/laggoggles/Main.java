@@ -11,16 +11,17 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Main.MODID_LOWER, name = Main.MODID, version = Main.VERSION, acceptableRemoteVersions = "*", guiFactory = "com.falsepattern.laggoggles.client.gui.GuiInGameConfigFactory")
+@Mod(modid = Tags.MODID,
+     name = Tags.MODNAME,
+     version = Tags.VERSION,
+     acceptedMinecraftVersions = "[1.7.10]",
+     acceptableRemoteVersions = "*",
+     guiFactory = "com.falsepattern.laggoggles.client.gui.GuiInGameConfigFactory")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
-    public static final String MODID = "LagGoggles";
-    public static final String MODID_LOWER = "laggoggles";
-    public static final String VERSION = "${version}";
     public static Logger LOGGER;
 
     @SidedProxy(
-            modId = Main.MODID_LOWER,
             serverSide = "com.falsepattern.laggoggles.CommonProxy",
             clientSide = "com.falsepattern.laggoggles.client.ClientProxy"
     )

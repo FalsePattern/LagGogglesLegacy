@@ -18,7 +18,7 @@ public class QuickText {
 
     @SubscribeEvent
     public void onDraw(RenderGameOverlayEvent.Post event){
-        renderer.drawStringWithShadow(text, event.getResolution().getScaledWidth()/2 - renderer.getStringWidth(text) / 2, 5, 0xFFFFFF);
+        renderer.drawStringWithShadow(text, event.resolution.getScaledWidth()/2 - renderer.getStringWidth(text) / 2, 5, 0xFFFFFF);
     }
 
     public void show(){

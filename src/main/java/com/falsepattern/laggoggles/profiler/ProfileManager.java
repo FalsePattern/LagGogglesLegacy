@@ -11,25 +11,22 @@ import com.falsepattern.laggoggles.util.RunInClientThread;
 import com.falsepattern.laggoggles.util.RunInServerThread;
 import com.falsepattern.laggoggles.util.Side;
 import com.falsepattern.laggoggles.util.*;
-import net.minecraft.block.state.IBlockState;
+import com.falsepattern.lib.compat.ChunkPos;
+import com.falsepattern.lib.text.FormattedText;
+import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.EnumChatFormatting;
+import com.falsepattern.lib.compat.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
@@ -49,7 +46,7 @@ public class ProfileManager {
             }
 
             /* Send status to users */
-            SPacketProfileStatus status = new SPacketProfileStatus(true, seconds, issuer.getName());
+            SPacketProfileStatus status = new SPacketProfileStatus(true, seconds, issuer.getCommandSenderName());
 
             new RunInServerThread(new Runnable() {
                 @Override
@@ -59,8 +56,8 @@ public class ProfileManager {
                     }
                 }
             });
-            issuer.sendMessage(new TextComponentString(TextFormatting.GRAY + Main.MODID + TextFormatting.WHITE + ": Profiler started for " + seconds + " seconds."));
-            Main.LOGGER.info(Main.MODID + " profiler started by " + issuer.getName() + " (" + seconds + " seconds)");
+            FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
+            Main.LOGGER.info(Main.MODID + " profiler started by " + issuer.getCommandSenderName() + " (" + seconds + " seconds)");
 
             long start = System.nanoTime();
             TickCounter.ticks.set(0L);
@@ -94,14 +91,14 @@ public class ProfileManager {
                                 continue;
                             }
                             for(Map.Entry<UUID, Long> entityTimes : entry.getValue().getEntityTimes().entrySet()){
-                                Entity e = world.getEntityFromUuid(entityTimes.getKey());
+                                Entity e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getUniqueID().equals(entityTimes.getKey())).findFirst().orElse(null);
                                 if(e == null){
                                     continue;
                                 }
                                 try {
                                     result.addData(new ObjectData(
                                             worldID,
-                                            e.getName(),
+                                            e.getCommandSenderName(),
                                             Graphical.formatClassName(e.getClass().toString()),
                                             e.getPersistentID(),
                                             entityTimes.getValue(),
@@ -112,24 +109,20 @@ public class ProfileManager {
                                 }
                             }
                             for(Map.Entry<BlockPos, Long> tileEntityTimes : entry.getValue().getBlockTimes().entrySet()){
-                                if(world.isBlockLoaded(tileEntityTimes.getKey()) == false){
+                                val pos = tileEntityTimes.getKey();
+                                val cPos = new ChunkPos(pos);
+                                if(world.isRemote ? world.getChunkProvider().provideChunk(cPos.x, cPos.z) == null : !world.getChunkProvider().chunkExists(cPos.x, cPos.z)) {
                                     continue;
                                 }
-                                TileEntity e = world.getTileEntity(tileEntityTimes.getKey());
+                                TileEntity e = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
                                 if(e != null) {
                                     try {
-                                        String name;
-                                        ITextComponent displayName = e.getDisplayName();
-                                        if (displayName != null) {
-                                            name = displayName.getFormattedText();
-                                        } else {
-                                            name = e.getClass().getSimpleName();
-                                        }
+                                        String name = e.getClass().getSimpleName();
                                         result.addData(new ObjectData(
                                                 worldID,
                                                 name,
                                                 Graphical.formatClassName(e.getClass().toString()),
-                                                e.getPos(),
+                                                new BlockPos(e.xCoord, e.yCoord, e.zCoord),
                                                 tileEntityTimes.getValue(),
                                                 ObjectData.Type.TILE_ENTITY)
                                         );
@@ -139,12 +132,12 @@ public class ProfileManager {
                                 }else{
                                     /* The block is not a tile entity, get the actual block. */
                                     try {
-                                        IBlockState state = world.getBlockState(tileEntityTimes.getKey());
-                                        String name = state.getBlock().getLocalizedName();
+                                        val block = world.getBlock(pos.getX(), pos.getY(), pos.getZ());
+                                        String name = block.getLocalizedName();
                                         result.addData(new ObjectData(
                                                 worldID,
                                                 name,
-                                                Graphical.formatClassName(state.getBlock().getClass().toString()),
+                                                Graphical.formatClassName(block.getClass().toString()),
                                                 tileEntityTimes.getKey(),
                                                 tileEntityTimes.getValue(),
                                                 ObjectData.Type.BLOCK));
@@ -191,7 +184,7 @@ public class ProfileManager {
             }
             MinecraftForge.EVENT_BUS.post(new LagGogglesEvent.LocalResult(LAST_PROFILE_RESULT.get()));
             Main.LOGGER.info("Profiling complete.");
-            issuer.sendMessage(new TextComponentString(TextFormatting.GRAY + Main.MODID + TextFormatting.WHITE + ": Profiling complete."));
+            FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
             return LAST_PROFILE_RESULT.get();
         } catch (Throwable e) {
             Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact Terminator_NL and submit the following error in an issue at github!");
@@ -202,14 +195,14 @@ public class ProfileManager {
 
     public static void insertGuiData(ProfileResult result, TimingManager timings) {
         TreeMap<UUID, Long> entityTimes = timings.getGuiEntityTimings();
-        for (Entity e : Minecraft.getMinecraft().world.loadedEntityList) {
+        for (Entity e : (List<Entity>)Minecraft.getMinecraft().theWorld.loadedEntityList) {
             Long time = entityTimes.get(e.getUniqueID());
             if (time == null) {
                 continue;
             }
             result.addData(new ObjectData(
-                    e.world.provider.getDimension(),
-                    e.getName(),
+                    e.worldObj.provider.dimensionId,
+                    e.getClass().getSimpleName(),
                     Graphical.formatClassName(e.getClass().toString()),
                     e.getPersistentID(),
                     time,
@@ -218,34 +211,28 @@ public class ProfileManager {
         }
 
         TreeMap<BlockPos, Long> blockTimes = timings.getGuiBlockTimings();
-        WorldClient world = Minecraft.getMinecraft().world;
+        WorldClient world = Minecraft.getMinecraft().theWorld;
         for (Map.Entry<BlockPos, Long> e: blockTimes.entrySet()) {
+            val pos = e.getKey();
             Long time = e.getValue();
-            TileEntity entity = world.getTileEntity(e.getKey());
+            TileEntity entity = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
             if(entity != null) {
-                String name;
-                ITextComponent displayName = entity.getDisplayName();
-                if (displayName != null) {
-                    name = displayName.getFormattedText();
-                } else {
-                    name = entity.getClass().getSimpleName();
-                }
+                String name = entity.getClass().getSimpleName();
                 result.addData(new ObjectData(
-                        entity.getWorld().provider.getDimension(),
+                        entity.getWorldObj().provider.dimensionId,
                         name,
                         Graphical.formatClassName(entity.getClass().toString()),
-                        entity.getPos(),
+                        new BlockPos(entity.xCoord, entity.yCoord, entity.zCoord),
                         time,
                         ObjectData.Type.GUI_BLOCK)
                 );
             }else{
                 /* The block is not a tile entity, get the actual block. */
-                IBlockState state = world.getBlockState(e.getKey());
-                String name = state.getBlock().getLocalizedName();
+                val block = world.getBlock(pos.getX(), pos.getY(), pos.getZ());
                 result.addData(new ObjectData(
-                        world.provider.getDimension(),
-                        name,
-                        Graphical.formatClassName(state.getBlock().getClass().toString()),
+                        world.provider.dimensionId,
+                        block.getLocalizedName(),
+                        Graphical.formatClassName(block.getClass().toString()),
                         e.getKey(),
                         time,
                         ObjectData.Type.GUI_BLOCK));

@@ -1,14 +1,18 @@
 package com.falsepattern.laggoggles.util;
 
-import net.minecraft.util.text.*;
-import net.minecraft.util.text.event.ClickEvent;
+
+import com.falsepattern.lib.text.FormattedText;
+import lombok.val;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 public class ClickableLink {
 
-    public static TextComponentString getLink(String link){
-        TextComponentString text = new TextComponentString(TextFormatting.BLUE + link);
-        Style style = text.getStyle();
-        style.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, link));
+    public static ChatComponentText getLink(String link){
+        val text = FormattedText.parse(EnumChatFormatting.BLUE + link).toChatText();
+        val style = text.getChatStyle();
+        style.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, link));
         return text;
     }
 }

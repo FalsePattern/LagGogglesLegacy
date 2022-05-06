@@ -85,17 +85,17 @@ public class GuiProfile extends GuiScreen {
 
         showToggle.enabled = profileLoaded;
         analyzeResults.enabled = profileLoaded;
-
-        addButton(startProfile);
-        addButton(showToggle);
-        addButton(analyzeResults);
-        addButton(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
-        addButton(optionsButton);
-        GuiLabel scrollHint = new GuiLabel(fontRenderer, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
-        scrollHint.addLine("Scroll while hovering over the button");
-        scrollHint.addLine("to change time time!");
-        labelList.add(scrollHint);
-        addButton(downloadButton);
+//        TODO
+//        addButton(startProfile);
+//        addButton(showToggle);
+//        addButton(analyzeResults);
+//        addButton(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
+//        addButton(optionsButton);
+//        GuiLabel scrollHint = new GuiLabel(fontRenderer, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
+//        scrollHint.addLine("Scroll while hovering over the button");
+//        scrollHint.addLine("to change time time!");
+//        labelList.add(scrollHint);
+//        addButton(downloadButton);
         initialized = true;
         updateButton();
     }
@@ -145,24 +145,25 @@ public class GuiProfile extends GuiScreen {
     }
 
     @Override
-    public void handleMouseInput() throws IOException{
+    public void handleMouseInput() {
         if(initialized == false){
             return;
         }
-        if(startProfile.isMouseOver() && startProfile.enabled){
-            int wheel = Mouse.getDWheel();
-            if(wheel != 0) {
-                seconds = seconds + ((wheel / 120) * 5); /* 1 Click is 120, 1 click is 5 seconds */
-                seconds = Math.max(seconds, 5);
-                boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
-                seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
-                if(triedMore){
-                    startProfile.displayString = "Limited to " + seconds + " seconds.";
-                }else {
-                    startProfile.displayString = "Profile for " + seconds + " seconds";
-                }
-            }
-        }
+        //TODO
+//        if(startProfile.isMouseOver() && startProfile.enabled){
+//            int wheel = Mouse.getDWheel();
+//            if(wheel != 0) {
+//                seconds = seconds + ((wheel / 120) * 5); /* 1 Click is 120, 1 click is 5 seconds */
+//                seconds = Math.max(seconds, 5);
+//                boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
+//                seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
+//                if(triedMore){
+//                    startProfile.displayString = "Limited to " + seconds + " seconds.";
+//                }else {
+//                    startProfile.displayString = "Profile for " + seconds + " seconds";
+//                }
+//            }
+//        }
         super.handleMouseInput();
         Mouse.getDWheel();
     }

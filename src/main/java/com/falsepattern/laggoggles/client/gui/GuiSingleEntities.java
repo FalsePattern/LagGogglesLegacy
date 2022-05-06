@@ -46,8 +46,8 @@ public class GuiSingleEntities extends GuiScrollingList {
     private int COLUMN_WIDTH_PERCENTAGES = 0;
     private ProfileResult result;
 
-    public GuiSingleEntities(Minecraft client, int width, int height, int top, int bottom, int left, int screenWidth, int screenHeight, ProfileResult result) {
-        super(client, width, height, top, bottom, left, slotHeight, screenWidth, screenHeight);
+    public GuiSingleEntities(Minecraft client, int width, int height, int top, int bottom, int left, ProfileResult result) {
+        super(client, width, height, top, bottom, left, slotHeight);
         FONTRENDERER = client.fontRenderer;
         this.result = result;
         ScanType type = result.getType();
@@ -125,8 +125,8 @@ public class GuiSingleEntities extends GuiScrollingList {
 
     }
 
-    public void handleMouseInput() throws IOException {
-        super.handleMouseInput(left, top);
+    public void handleMouseInput() {
+        //TODO super.handleMouseInput(left, top);
     }
 
     @Override

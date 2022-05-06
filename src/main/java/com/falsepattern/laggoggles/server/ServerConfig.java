@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
 
+//TODO
 @Config(modid = Main.MODID_LOWER, name = Main.MODID + "-server")
 public class ServerConfig {
 

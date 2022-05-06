@@ -2,12 +2,12 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.util.Perms;
+import com.falsepattern.lib.text.FormattedText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import cpw.mods.fml.client.config.GuiUtils;
 
 import java.util.ArrayList;
 
@@ -25,11 +25,11 @@ public class DownloadButton extends GuiButton{
     }
 
     @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partial) {
-        super.drawButton(mc, mouseX, mouseY, partial);
+    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+        super.drawButton(mc, mouseX, mouseY);
         mc.getTextureManager().bindTexture(DOWNLOAD_TEXTURE);
-        drawModalRectWithCustomSizedTexture(x+3,y+3,0,0,14,14,14,14);
-        if(hovered){
+        drawTexturedModalRect(xPosition + 3, yPosition + 3, 0, 0, 14, 14);
+        if (this.mousePressed(mc, mouseX, mouseY)) {
             ArrayList<String> hover = new ArrayList<>();
             hover.add("Download the latest available");
             hover.add("world result from the server.");
@@ -40,13 +40,11 @@ public class DownloadButton extends GuiButton{
 
                 if(getSecondsLeftForMessage() >= 0){
                     hover.add("");
-                    hover.add(TextFormatting.GRAY + "Remember: There's a cooldown on this, you");
-                    hover.add(TextFormatting.GRAY + "may have to wait before you can use it again.");
+                    hover.add(EnumChatFormatting.GRAY + "Remember: There's a cooldown on this, you");
+                    hover.add(EnumChatFormatting.GRAY + "may have to wait before you can use it again.");
                 }
             }
-
-            GuiUtils.drawHoveringText(hover, mouseX, mouseY, parent.width, parent.height, -1, mc.fontRenderer);
-
+            FormattedText.parse(String.join("\n", hover)).draw(mc.fontRenderer, mouseX, mouseY);
         }
     }
 }

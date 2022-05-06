@@ -26,8 +26,8 @@ public class GuiEventTypes extends GuiScrollingList {
     private TreeSet<GuiScanResultsWorld.LagSource> DATA = new TreeSet<>(Collections.reverseOrder());
     private final ProfileResult result;
 
-    public GuiEventTypes(Minecraft client, int width, int height, int top, int bottom, int left, int screenWidth, int screenHeight, ProfileResult result) {
-        super(client, width, height, top, bottom, left, slotHeight, screenWidth, screenHeight);
+    public GuiEventTypes(Minecraft client, int width, int height, int top, int bottom, int left, ProfileResult result) {
+        super(client, width, height, top, bottom, left, slotHeight);
         FONTRENDERER = client.fontRenderer;
         this.result = result;
 
@@ -83,8 +83,8 @@ public class GuiEventTypes extends GuiScrollingList {
 
     }
 
-    public void handleMouseInput() throws IOException {
-        super.handleMouseInput(left, top);
+    public void handleMouseInput() {
+        //TODO super.handleMouseInput(left, top);
     }
 
     public void displayCantSeeResults(int slotTop){

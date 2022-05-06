@@ -4,6 +4,7 @@ import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.server.RequestDataHandler;
 import com.falsepattern.laggoggles.server.ServerConfig;
+import lombok.val;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,6 +14,8 @@ import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class Perms {
@@ -28,7 +31,7 @@ public class Perms {
     }
 
     public static Permission getPermission(EntityPlayer p){
-        if(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0 || FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer() == false) {
+        if(/*TODO FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0 || */!FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer()) {
             return Permission.FULL;
         }else{
             return ServerConfig.NON_OP_PERMISSION_LEVEL;
@@ -46,7 +49,11 @@ public class Perms {
             return list;
         }
         for(UUID uuid : RequestDataHandler.playersWithLagGoggles){
-            Entity entity = server.getEntityFromUuid(uuid);
+            Entity entity = Arrays.stream(server.worldServers)
+                                  .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
+                                  .filter((ent) -> ent.getUniqueID().equals(uuid))
+                                  .findFirst()
+                                  .orElse(null);
             if(entity instanceof EntityPlayerMP){
                 list.add((EntityPlayerMP) entity);
             }
@@ -82,7 +89,10 @@ public class Perms {
             case ENTITY:
                 WorldServer world = DimensionManager.getWorld(data.getValue(ObjectData.Entry.WORLD_ID));
                 Entity e;
-                if(world != null && (e = world.getEntityFromUuid(data.getValue(ObjectData.Entry.ENTITY_UUID))) != null){
+                val uuid = data.getValue(ObjectData.Entry.ENTITY_UUID);
+                if(world != null && (e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getUniqueID().equals(uuid))
+                                                                                    .findFirst()
+                                                                                    .orElse(null)) != null){
                     return checkRange(player, e.posX, e.posY, e.posZ);
                 }
                 return false;

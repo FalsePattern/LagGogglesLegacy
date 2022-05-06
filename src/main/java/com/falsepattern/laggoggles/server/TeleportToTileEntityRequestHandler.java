@@ -14,9 +14,9 @@ public class TeleportToTileEntityRequestHandler implements IMessageHandler<CPack
 
     @Override
     public IMessage onMessage(final CPacketRequestTileEntityTeleport message, MessageContext ctx) {
-        EntityPlayerMP player = ctx.getServerHandler().player;
+        EntityPlayerMP player = ctx.getServerHandler().playerEntity;
         if(Perms.hasPermission(player, Perms.Permission.FULL) == false){
-            Main.LOGGER.info(player.getName() + " tried to teleport, but was denied to do so!");
+            Main.LOGGER.info(player.getDisplayName() + " tried to teleport, but was denied to do so!");
             return new SPacketMessage("No permission");
         }
         Teleport.teleportPlayer(player, message.dim, message.x, message.y, message.z);
