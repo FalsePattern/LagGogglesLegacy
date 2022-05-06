@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
@@ -38,7 +38,7 @@ public class GuiEventTypes extends GuiScrollingList {
 
 
                     /* This removes the LagGoggles tooltip from the results, as it's only visible while profiling, it's clutter. */
-                    if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_LISTENER).contains(Main.MODID)){
+                    if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_LISTENER).contains(Tags.MODID)){
                         if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_EVENT_CLASS_NAME).equals(Graphical.formatClassName(net.minecraftforge.client.event.RenderGameOverlayEvent.Post.class.toString()))) {
                             continue;
                         }

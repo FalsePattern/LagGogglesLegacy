@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.text.FormattedText;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,7 @@ import static com.falsepattern.laggoggles.client.gui.GuiProfile.getSecondsLeftFo
 
 public class DownloadButton extends GuiButton{
 
-    private ResourceLocation DOWNLOAD_TEXTURE = new ResourceLocation(Main.MODID_LOWER, "download.png");
+    private ResourceLocation DOWNLOAD_TEXTURE = new ResourceLocation(Tags.MODID, "download.png");
     private final GuiScreen parent;
 
     public DownloadButton(GuiScreen parent, int buttonId, int x, int y) {

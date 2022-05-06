@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.command;
 
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.api.Profiler;
 import com.falsepattern.laggoggles.client.gui.GuiScanResultsWorld;
 import com.falsepattern.laggoggles.packet.ObjectData;
@@ -27,7 +28,7 @@ public class LagGogglesCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return Main.MODID.toLowerCase();
+        return Tags.MODID;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class LagGogglesCommand extends CommandBase {
                 @Override
                 public void run() {
                     Profiler.runProfiler(seconds, ScanType.WORLD, sender);
-                    FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": You can see results using /" + getCommandName() + " dump").addChatMessage(sender);
+                    FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": You can see results using /" + getCommandName() + " dump").addChatMessage(sender);
                 }
             }).start();
             return;
@@ -68,7 +69,7 @@ public class LagGogglesCommand extends CommandBase {
             dump(sender);
             return;
         }
-        FormattedText.parse(EnumChatFormatting.GRAY + "Running LagGoggles version: " + EnumChatFormatting.GREEN + Main.VERSION).addChatMessage(sender);
+        FormattedText.parse(EnumChatFormatting.GRAY + "Running LagGoggles version: " + EnumChatFormatting.GREEN + Tags.VERSION).addChatMessage(sender);
         sender.addChatMessage(ClickableLink.getLink("https://minecraft.curseforge.com/projects/laggoggles"));
         sender.addChatMessage(new ChatComponentText(""));
         FormattedText.parse(EnumChatFormatting.GRAY + "Available arguments:").addChatMessage(sender);

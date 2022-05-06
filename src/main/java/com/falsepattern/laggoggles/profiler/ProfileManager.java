@@ -1,5 +1,6 @@
 package com.falsepattern.laggoggles.profiler;
 
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.api.event.LagGogglesEvent;
@@ -56,8 +57,8 @@ public class ProfileManager {
                     }
                 }
             });
-            FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
-            Main.LOGGER.info(Main.MODID + " profiler started by " + issuer.getCommandSenderName() + " (" + seconds + " seconds)");
+            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
+            Main.LOGGER.info(Tags.MODNAME + " profiler started by " + issuer.getCommandSenderName() + " (" + seconds + " seconds)");
 
             long start = System.nanoTime();
             TickCounter.ticks.set(0L);
@@ -184,7 +185,7 @@ public class ProfileManager {
             }
             MinecraftForge.EVENT_BUS.post(new LagGogglesEvent.LocalResult(LAST_PROFILE_RESULT.get()));
             Main.LOGGER.info("Profiling complete.");
-            FormattedText.parse(EnumChatFormatting.GRAY + Main.MODID + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
+            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
             return LAST_PROFILE_RESULT.get();
         } catch (Throwable e) {
             Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact Terminator_NL and submit the following error in an issue at github!");

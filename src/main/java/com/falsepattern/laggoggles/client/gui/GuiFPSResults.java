@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.client.gui;
 
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -26,7 +27,7 @@ public class GuiFPSResults extends GuiScreen{
         super.initGui();
 
         /*                                            width  , height              , top                   , bottom         , left      , screenWidth, screenHeight, ProfileResult*/
-        guiSingleEntities = new GuiSingleEntities(mc, width/2, height - 25         , 45                    , height         ,  0        , width      , height      , result);
+        guiSingleEntities = new GuiSingleEntities(mc, width/2, height - 25         , 45                    , height         ,  0      , result);
         guiEntityTypes    = new GuiEntityTypes(   mc, width/2, (height - 25)/2     , 45                    , (height - 25)/2,  width/2      , result);
         guiEventTypes     = new GuiEventTypes(    mc, width/2, (height - 25)/2 - 12, ((height - 25)/2) + 12, height         ,  width/2     , result);
     }
@@ -39,7 +40,7 @@ public class GuiFPSResults extends GuiScreen{
         guiSingleEntities.drawScreen(mouseX, mouseY, partialTicks);
         guiEntityTypes.drawScreen(mouseX, mouseY, partialTicks);
         guiEventTypes.drawScreen(mouseX, mouseY, partialTicks);
-        drawString(Main.MODID + ": profile data for FPS scan results", 5, 5, 0xFFFFFF);
+        drawString(Tags.MODNAME + ": profile data for FPS scan results", 5, 5, 0xFFFFFF);
         drawString("Times are presented in nanoseconds per frame.", 5, 15, 0xCCCCCC);
         drawString("Single entities", 5, 35, 0xFFFFFF);
         drawString(" (Doubleclick to teleport)", 5 + FONTRENDERER.getStringWidth("Single entities"), 35, 0x666666);

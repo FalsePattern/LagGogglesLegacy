@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +12,7 @@ import java.net.URISyntaxException;
 
 public class DonateButton extends GuiButton {
 
-    private ResourceLocation DONATE_TEXTURE = new ResourceLocation(Main.MODID_LOWER, "donate.png");
+    private ResourceLocation DONATE_TEXTURE = new ResourceLocation(Tags.MODID, "donate.png");
     private static final URI DONATE_URL;
     static {
         try {

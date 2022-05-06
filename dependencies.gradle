@@ -1,5 +1,5 @@
 dependencies {
-    compile("com.falsepattern:falsepatternlib-mc1.7.10:0.6.0-alpha6:dev")
+    compile("com.falsepattern:falsepatternlib-mc1.7.10:0.6.0-alpha10:dev")
     compileOnly("org.projectlombok:lombok:1.18.22") {
         transitive = false
     }

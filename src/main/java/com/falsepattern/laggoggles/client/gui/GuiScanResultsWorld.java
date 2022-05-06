@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.client.gui;
 
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,7 @@ public class GuiScanResultsWorld extends GuiScreen {
         guiSingleEntities.drawScreen(mouseX, mouseY, partialTicks);
         guiEntityTypes.drawScreen(mouseX, mouseY, partialTicks);
         guiEventTypes.drawScreen(mouseX, mouseY, partialTicks);
-        drawString(Main.MODID + ": profile data for WORLD scan results", 5, 5, 0xFFFFFF);
+        drawString(Tags.MODNAME + ": profile data for WORLD scan results", 5, 5, 0xFFFFFF);
         drawString("Times are presented in microseconds", 5, 15, 0xCCCCCC);
         drawString("Single entities", 5, 35, 0xFFFFFF);
         drawString(" (Doubleclick to teleport)", 5 + FONTRENDERER.getStringWidth("Single entities"), 35, 0x666666);

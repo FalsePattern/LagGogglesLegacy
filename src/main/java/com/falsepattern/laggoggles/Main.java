@@ -1,7 +1,6 @@
 package com.falsepattern.laggoggles;
 
 import com.falsepattern.laggoggles.proxy.ClientProxy;
-import com.falsepattern.laggoggles.mixinhelper.MixinValidator;
 import com.falsepattern.laggoggles.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,7 +31,6 @@ public class Main {
     public void preinit(FMLPreInitializationEvent e){
         LOGGER = e.getModLog();
         proxy.preinit(e);
-        MixinValidator.validate();
         Main.LOGGER.info("Registered sided proxy for: " + (proxy instanceof ClientProxy ? "Client" : "Dedicated server"));
     }
 
