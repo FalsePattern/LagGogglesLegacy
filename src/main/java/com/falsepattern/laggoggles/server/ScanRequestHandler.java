@@ -1,9 +1,8 @@
 package com.falsepattern.laggoggles.server;
 
-import com.falsepattern.laggoggles.CommonProxy;
+import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.api.Profiler;
-import com.falsepattern.laggoggles.packet.*;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.packet.CPacketRequestScan;

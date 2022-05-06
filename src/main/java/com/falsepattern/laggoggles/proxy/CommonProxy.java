@@ -1,5 +1,6 @@
-package com.falsepattern.laggoggles;
+package com.falsepattern.laggoggles.proxy;
 
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.MessagePacketHandler;
 import com.falsepattern.laggoggles.client.ProfileStatusHandler;
 import com.falsepattern.laggoggles.client.ScanResultHandler;

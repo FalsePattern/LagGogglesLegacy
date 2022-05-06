@@ -19,7 +19,7 @@
 
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.client.ClientProxy;
+import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.packet.CPacketRequestEntityTeleport;
 import com.falsepattern.laggoggles.packet.CPacketRequestTileEntityTeleport;
 import com.falsepattern.laggoggles.packet.ObjectData;
@@ -32,7 +32,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.client.GuiScrollingList;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 

@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.client.ClientProxy;
+import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.client.gui.buttons.DonateButton;
 import com.falsepattern.laggoggles.client.gui.buttons.DownloadButton;
@@ -15,11 +15,9 @@ import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.profiler.ProfileManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Mouse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiProfile extends GuiScreen {

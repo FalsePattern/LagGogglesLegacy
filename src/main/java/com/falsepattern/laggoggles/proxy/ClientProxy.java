@@ -1,7 +1,7 @@
-package com.falsepattern.laggoggles.client;
+package com.falsepattern.laggoggles.proxy;
 
-import com.falsepattern.laggoggles.CommonProxy;
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.KeyHandler;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
@@ -23,12 +23,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postinit(FMLPostInitializationEvent e){
         super.postinit(e);
-        ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Main.MODID, new KeyHandler.CallBack() {
-            @Override
-            public void onPress() {
-                Minecraft.getMinecraft().displayGuiScreen(new GuiProfile());
-            }
-        }));
+        ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Tags.MODID, () -> Minecraft.getMinecraft().displayGuiScreen(new GuiProfile())));
 
         MinecraftForge.EVENT_BUS.register(new Object(){
             @SubscribeEvent
@@ -41,13 +36,13 @@ public class ClientProxy extends CommonProxy {
         });
     }
 
-    private class ClientLoginAction {
+    private static class ClientLoginAction {
 
         int count = 0;
 
         @SubscribeEvent
         public void onTick(TickEvent.ClientTickEvent e){
-            if(RECEIVED_RESULT == true){
+            if(RECEIVED_RESULT){
                 MinecraftForge.EVENT_BUS.unregister(this);
                 return;
             }

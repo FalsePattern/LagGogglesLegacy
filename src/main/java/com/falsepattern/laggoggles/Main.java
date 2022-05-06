@@ -1,7 +1,8 @@
 package com.falsepattern.laggoggles;
 
-import com.falsepattern.laggoggles.client.ClientProxy;
+import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.mixinhelper.MixinValidator;
+import com.falsepattern.laggoggles.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -22,8 +23,8 @@ public class Main {
     public static Logger LOGGER;
 
     @SidedProxy(
-            serverSide = Tags.GROUPNAME + ".CommonProxy",
-            clientSide = Tags.GROUPNAME + ".client.ClientProxy"
+            serverSide = Tags.GROUPNAME + ".proxy.ServerProxy",
+            clientSide = Tags.GROUPNAME + ".proxy.ClientProxy"
     )
     public static CommonProxy proxy;
 

@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.profiler;
 
-import com.falsepattern.laggoggles.CommonProxy;
+import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.api.event.LagGogglesEvent;
 import com.falsepattern.laggoggles.client.FPSCounter;

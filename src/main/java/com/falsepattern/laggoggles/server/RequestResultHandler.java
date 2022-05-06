@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.server;
 
-import com.falsepattern.laggoggles.CommonProxy;
+import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.packet.CPacketRequestResult;
 import com.falsepattern.laggoggles.packet.SPacketMessage;
 import com.falsepattern.laggoggles.util.Perms;
