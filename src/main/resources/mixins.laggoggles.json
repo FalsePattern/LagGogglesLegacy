@@ -1,17 +1,10 @@
 {
-  "package": "com.falsepattern.laggoggles.mixin",
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "com.falsepattern.laggoggles.mixin.mixins",
+  "plugin": "com.falsepattern.laggoggles.mixin.plugin.MixinPlugin",
   "refmap": "mixins.laggoggles.refmap.json",
-  "compatibilityLevel": "JAVA_8",
-  "minVersion": "0.6.0",
-  "plugin": "com.falsepattern.laggoggles.mixinhelper.MixinConfigPlugin",
-  "mixins": [
-    "com.falsepattern.laggoggles.mixin.MixinWorld",
-    "com.falsepattern.laggoggles.mixin.MixinEntity",
-    "com.falsepattern.laggoggles.mixin.MixinWorldServerSponge",
-    "com.falsepattern.laggoggles.mixin.MixinWorldServerForge",
-    "com.falsepattern.laggoggles.mixin.MixinEventBus",
-    "com.falsepattern.laggoggles.mixin.MixinASMEventHandler",
-    "com.falsepattern.laggoggles.mixin.MixinTileEntityRendererDispatcher",
-    "com.falsepattern.laggoggles.mixin.MixinRenderManager"
-  ]
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8"
 }
+

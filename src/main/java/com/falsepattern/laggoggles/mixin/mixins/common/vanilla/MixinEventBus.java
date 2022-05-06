@@ -1,4 +1,4 @@
-package com.falsepattern.laggoggles.mixin;
+package com.falsepattern.laggoggles.mixin.mixins.common.vanilla;
 
 import com.falsepattern.laggoggles.util.ASMEventHandler;
 import com.google.common.base.Throwables;
@@ -48,11 +48,14 @@ public abstract class MixinEventBus implements IEventExceptionHandler {
             this.exceptionHandler.handleException((EventBus) (IEventExceptionHandler) this, event, listeners, index, throwable);
             Throwables.propagate(throwable);
         }
-        return event.isCancelable() ? event.isCanceled() : false;
+        return event.isCancelable() && event.isCanceled();
     }
 
-    @Inject(method = "post(Lnet/minecraftforge/fml/common/eventhandler/Event;)Z", at = @At("HEAD"), cancellable = true)
-    public void beforePost(Event event, CallbackInfoReturnable<Boolean> ci){
+    @Inject(method = "post",
+            at = @At("HEAD"),
+            cancellable = true,
+            require = 1)
+    private void beforePost(Event event, CallbackInfoReturnable<Boolean> ci){
         if(PROFILE_ENABLED.get()){
             ci.setReturnValue(postWithScan(event));
         }

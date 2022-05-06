@@ -1,4 +1,4 @@
-package com.falsepattern.laggoggles.mixin;
+package com.falsepattern.laggoggles.mixin.mixins.common.vanilla;
 
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,13 +23,17 @@ public abstract class MixinEntity {
 
     private Long LAGGOGGLES_START = null;
 
-    @Inject(method = "onUpdate", at = @At("HEAD"))
-    public void onEntityUpdateHEAD(CallbackInfo info){
+    @Inject(method = "onUpdate",
+            at = @At("HEAD"),
+            require = 1)
+    private void onEntityUpdateHEAD(CallbackInfo info){
         LAGGOGGLES_START = System.nanoTime();
     }
 
-    @Inject(method = "onUpdate", at = @At("RETURN"))
-    public void onEntityUpdateRETURN(CallbackInfo info){
+    @Inject(method = "onUpdate",
+            at = @At("RETURN"),
+            require = 1)
+    private void onEntityUpdateRETURN(CallbackInfo info){
         if(PROFILE_ENABLED.get() && LAGGOGGLES_START != null){
             timingManager.addEntityTime(dimension, entityUniqueID, System.nanoTime() - LAGGOGGLES_START);
         }
