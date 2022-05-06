@@ -16,14 +16,14 @@ import org.apache.logging.log4j.Logger;
      version = Tags.VERSION,
      acceptedMinecraftVersions = "[1.7.10]",
      acceptableRemoteVersions = "*",
-     guiFactory = "com.falsepattern.laggoggles.client.gui.GuiInGameConfigFactory")
+     guiFactory = Tags.GROUPNAME + ".client.gui.GuiInGameConfigFactory")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
     public static Logger LOGGER;
 
     @SidedProxy(
-            serverSide = "com.falsepattern.laggoggles.CommonProxy",
-            clientSide = "com.falsepattern.laggoggles.client.ClientProxy"
+            serverSide = Tags.GROUPNAME + ".CommonProxy",
+            clientSide = Tags.GROUPNAME + ".client.ClientProxy"
     )
     public static CommonProxy proxy;
 
