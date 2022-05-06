@@ -2,10 +2,14 @@ package com.falsepattern.laggoggles.proxy;
 
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
+import com.falsepattern.laggoggles.client.ClientConfig;
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.KeyHandler;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
+import com.falsepattern.lib.config.ConfigurationManager;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -19,6 +23,13 @@ import static com.falsepattern.laggoggles.client.ServerDataPacketHandler.RECEIVE
 import static com.falsepattern.laggoggles.profiler.ProfileManager.LAST_PROFILE_RESULT;
 
 public class ClientProxy extends CommonProxy {
+
+    @Override
+    @SneakyThrows
+    public void preinit(FMLPreInitializationEvent e) {
+        super.preinit(e);
+        ConfigurationManager.registerConfig(ClientConfig.class);
+    }
 
     @Override
     public void postinit(FMLPostInitializationEvent e){
