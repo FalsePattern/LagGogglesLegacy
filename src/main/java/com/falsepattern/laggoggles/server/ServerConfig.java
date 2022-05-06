@@ -1,24 +1,9 @@
 package com.falsepattern.laggoggles.server;
 
-import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.util.Perms;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-
-import java.io.File;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.Optional;
-
-//TODO
-@Config(modid = Main.MODID_LOWER, name = Main.MODID + "-server")
+import com.falsepattern.lib.config.Config;
+@Config(modid = Tags.MODID, category = "server")
 public class ServerConfig {
 
     @Config.Comment("What's the permission level available to non-operators (Normal players)?\n" +
@@ -51,49 +36,4 @@ public class ServerConfig {
 
     @Config.Comment("How often can normal users request the latest scan result in seconds?")
     public static int NON_OPS_REQUEST_LAST_SCAN_DATA_TIMEOUT = 30;
-
-    @Mod.EventBusSubscriber
-    public static class ConfigurationHolder {
-
-        public static MethodHandle findFieldGetter(Class<?> clazz, String... fieldNames) {
-            final Field field = ReflectionHelper.findField(clazz, fieldNames);
-
-            try {
-                return MethodHandles.lookup().unreflectGetter(field);
-            } catch (IllegalAccessException e) {
-                throw new ReflectionHelper.UnableToAccessFieldException(fieldNames, e);
-            }
-        }
-        private static final MethodHandle CONFIGS_GETTER = findFieldGetter(ConfigManager.class, "CONFIGS");
-        private static Configuration configuration;
-        public static Configuration getConfiguration() {
-            if (configuration == null) {
-                try {
-                    final String fileName = Main.MODID + "-server.cfg";
-
-                    @SuppressWarnings("unchecked")
-                    final Map<String, Configuration> configsMap = (Map<String, Configuration>) CONFIGS_GETTER.invokeExact();
-
-                    final Optional<Map.Entry<String, Configuration>> entryOptional = configsMap.entrySet().stream()
-                            .filter(entry -> fileName.equals(new File(entry.getKey()).getName()))
-                            .findFirst();
-
-                    if (entryOptional.isPresent()) {
-                        configuration = entryOptional.get().getValue();
-                    }
-                } catch (Throwable e) {
-                    Main.LOGGER.error("Failed to get Configuration instance", e);
-                }
-            }
-
-            return configuration;
-        }
-
-        @SubscribeEvent
-        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(Main.MODID_LOWER)) {
-                ConfigManager.load(Main.MODID_LOWER, Config.Type.INSTANCE);
-            }
-        }
-    }
 }
