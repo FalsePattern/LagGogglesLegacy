@@ -36,7 +36,7 @@ public class ClientProxy extends CommonProxy {
         super.postinit(e);
         ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Tags.MODID, () -> Minecraft.getMinecraft().displayGuiScreen(new GuiProfile())));
 
-        MinecraftForge.EVENT_BUS.register(new Object(){
+        FMLCommonHandler.instance().bus().register(new Object(){
             @SubscribeEvent
             public void onLogin(FMLNetworkEvent.ClientConnectedToServerEvent e){
                 RECEIVED_RESULT = false;
@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy {
         @SubscribeEvent
         public void onTick(TickEvent.ClientTickEvent e){
             if(RECEIVED_RESULT){
-                MinecraftForge.EVENT_BUS.unregister(this);
+                FMLCommonHandler.instance().bus().unregister(this);
                 return;
             }
             if(e.phase != TickEvent.Phase.START){
@@ -66,7 +66,7 @@ public class ClientProxy extends CommonProxy {
         }
 
         public void activate(){
-            MinecraftForge.EVENT_BUS.register(this);
+            FMLCommonHandler.instance().bus().register(this);
         }
 
     }

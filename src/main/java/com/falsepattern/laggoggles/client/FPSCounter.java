@@ -15,11 +15,11 @@ public class FPSCounter {
 
     public void start(){
         frames = 0;
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     public long stop(){
-        MinecraftForge.EVENT_BUS.unregister(this);
+        FMLCommonHandler.instance().bus().unregister(this);
         return frames;
     }
 }

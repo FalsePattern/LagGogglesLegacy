@@ -37,7 +37,7 @@ public class ScanResultHandler implements IMessageHandler<SPacketScanResult, IMe
             LagOverlayGui.create(result);
             LagOverlayGui.show();
             GuiProfile.update();
-            MinecraftForge.EVENT_BUS.post(new LagGogglesEvent.ReceivedFromServer(result));
+            FMLCommonHandler.instance().bus().post(new LagGogglesEvent.ReceivedFromServer(result));
         }
         return null;
     }

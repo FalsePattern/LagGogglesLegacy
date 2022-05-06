@@ -12,7 +12,7 @@ public class KeyHandler extends KeyBinding {
     public KeyHandler(String description, int keyCode, String category, CallBack callback) {
         super(description, keyCode, category);
         this.callBack = callback;
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     @SubscribeEvent

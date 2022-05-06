@@ -87,7 +87,7 @@ public class CommonProxy {
 
     public void serverStartingEvent(FMLServerStartingEvent e){
         e.registerServerCommand(new LagGogglesCommand());
-        MinecraftForge.EVENT_BUS.register(new TickCounter());
-        MinecraftForge.EVENT_BUS.register(new RequestDataHandler());
+        FMLCommonHandler.instance().bus().register(new TickCounter());
+        FMLCommonHandler.instance().bus().register(new RequestDataHandler());
     }
 }

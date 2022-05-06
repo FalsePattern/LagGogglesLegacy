@@ -413,7 +413,7 @@ public class LagOverlayGui {
     }
 
     private void _hide(){
-        MinecraftForge.EVENT_BUS.unregister(this);
+        FMLCommonHandler.instance().bus().unregister(this);
         quickText.hide();
         isShowing.set(false);
     }
@@ -421,7 +421,7 @@ public class LagOverlayGui {
     private void _show(){
         isShowing.set(true);
         new Thread(TIMELY_UPDATES).start();
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
         quickText.show();
     }
 

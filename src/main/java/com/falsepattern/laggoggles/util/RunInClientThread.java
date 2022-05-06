@@ -10,12 +10,12 @@ public class RunInClientThread {
 
     public RunInClientThread(Runnable runnable){
         this.runnable = runnable;
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent e){
-        MinecraftForge.EVENT_BUS.unregister(this);
+        FMLCommonHandler.instance().bus().unregister(this);
         runnable.run();
     }
 }

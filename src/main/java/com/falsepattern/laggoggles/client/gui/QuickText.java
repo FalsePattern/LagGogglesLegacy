@@ -22,10 +22,10 @@ public class QuickText {
     }
 
     public void show(){
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     public void hide(){
-        MinecraftForge.EVENT_BUS.unregister(this);
+        FMLCommonHandler.instance().bus().unregister(this);
     }
 }

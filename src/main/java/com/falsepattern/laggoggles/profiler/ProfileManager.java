@@ -183,7 +183,7 @@ public class ProfileManager {
             synchronized (LOCK) {
                 LOCK.wait();
             }
-            MinecraftForge.EVENT_BUS.post(new LagGogglesEvent.LocalResult(LAST_PROFILE_RESULT.get()));
+            FMLCommonHandler.instance().bus().post(new LagGogglesEvent.LocalResult(LAST_PROFILE_RESULT.get()));
             Main.LOGGER.info("Profiling complete.");
             FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
             return LAST_PROFILE_RESULT.get();

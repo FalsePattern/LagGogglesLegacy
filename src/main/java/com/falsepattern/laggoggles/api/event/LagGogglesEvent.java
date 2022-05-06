@@ -27,7 +27,7 @@ public class LagGogglesEvent extends Event {
      * If you need to perform any action based on this result, make sure
      * that you do it in the Minecraft thread, and NOT this one.
      *
-     * Fired on the MinecraftForge.EVENT_BUS.
+     * Fired on the FMLCommonHandler.instance().bus().
      */
     public static class ReceivedFromServer extends LagGogglesEvent{
         public ReceivedFromServer(ProfileResult result){
@@ -43,7 +43,7 @@ public class LagGogglesEvent extends Event {
      * If you need to perform any action based on this result, make sure
      * that you do it in the Minecraft thread, and NOT this one.
      *
-     * Fired on the MinecraftForge.EVENT_BUS.
+     * Fired on the FMLCommonHandler.instance().bus().
      */
     public static class LocalResult extends LagGogglesEvent{
         public LocalResult(ProfileResult result){
