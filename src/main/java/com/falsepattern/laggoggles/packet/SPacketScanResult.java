@@ -2,8 +2,8 @@ package com.falsepattern.laggoggles.packet;
 
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.util.Side;
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 

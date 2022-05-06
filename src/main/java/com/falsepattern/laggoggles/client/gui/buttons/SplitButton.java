@@ -2,8 +2,6 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
-import lombok.val;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
 import java.util.List;

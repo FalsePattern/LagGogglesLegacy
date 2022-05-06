@@ -1,8 +1,8 @@
 package com.falsepattern.laggoggles.packet;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
 
 public class SPacketMessage implements IMessage{
 

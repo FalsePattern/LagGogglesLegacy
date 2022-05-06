@@ -1,6 +1,7 @@
 package com.falsepattern.laggoggles.client.gui;
 
 import com.falsepattern.laggoggles.Tags;
+import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
@@ -8,13 +9,11 @@ import com.falsepattern.laggoggles.profiler.TimingManager;
 import com.falsepattern.laggoggles.util.Calculations;
 import com.falsepattern.laggoggles.util.Graphical;
 import com.falsepattern.laggoggles.util.Perms;
-import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
+import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
-import cpw.mods.fml.client.GuiScrollingList;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.TreeSet;
 

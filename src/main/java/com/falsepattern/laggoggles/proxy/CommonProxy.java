@@ -7,15 +7,12 @@ import com.falsepattern.laggoggles.client.ScanResultHandler;
 import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.command.LagGogglesCommand;
 import com.falsepattern.laggoggles.packet.*;
-import com.falsepattern.laggoggles.packet.*;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.TickCounter;
 import com.falsepattern.laggoggles.server.*;
-import com.falsepattern.laggoggles.server.*;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.util.RunInServerThread;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -24,6 +21,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.List;
 

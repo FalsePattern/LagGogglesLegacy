@@ -1,6 +1,5 @@
 package com.falsepattern.laggoggles.client.gui.buttons;
 
-import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.text.FormattedText;

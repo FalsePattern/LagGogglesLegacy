@@ -4,6 +4,7 @@ import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.server.RequestDataHandler;
 import com.falsepattern.laggoggles.server.ServerConfig;
+import cpw.mods.fml.common.FMLCommonHandler;
 import lombok.val;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;

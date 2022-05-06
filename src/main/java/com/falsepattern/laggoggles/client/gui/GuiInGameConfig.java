@@ -1,14 +1,10 @@
 package com.falsepattern.laggoggles.client.gui;
 
 
-import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
-import com.falsepattern.laggoggles.client.ClientConfig;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraft.client.gui.GuiScreen;
 
 import java.util.ArrayList;
 

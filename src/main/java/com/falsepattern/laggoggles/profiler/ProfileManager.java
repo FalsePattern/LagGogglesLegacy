@@ -1,19 +1,17 @@
 package com.falsepattern.laggoggles.profiler;
 
-import com.falsepattern.laggoggles.Tags;
-import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.Main;
+import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.api.event.LagGogglesEvent;
 import com.falsepattern.laggoggles.client.FPSCounter;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.packet.SPacketProfileStatus;
-import com.falsepattern.laggoggles.util.Perms;
-import com.falsepattern.laggoggles.util.RunInClientThread;
-import com.falsepattern.laggoggles.util.RunInServerThread;
-import com.falsepattern.laggoggles.util.Side;
+import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.util.*;
+import com.falsepattern.lib.compat.BlockPos;
 import com.falsepattern.lib.compat.ChunkPos;
 import com.falsepattern.lib.text.FormattedText;
+import cpw.mods.fml.common.FMLCommonHandler;
 import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -22,10 +20,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import com.falsepattern.lib.compat.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;

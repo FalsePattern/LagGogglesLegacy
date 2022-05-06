@@ -5,10 +5,10 @@ import com.falsepattern.laggoggles.packet.CPacketRequestTileEntityTeleport;
 import com.falsepattern.laggoggles.packet.SPacketMessage;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.util.Teleport;
-import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public class TeleportToTileEntityRequestHandler implements IMessageHandler<CPacketRequestTileEntityTeleport, IMessage> {
 

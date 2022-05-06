@@ -3,9 +3,9 @@ package com.falsepattern.laggoggles.packet;
 import com.falsepattern.laggoggles.profiler.TimingManager;
 import com.falsepattern.laggoggles.util.Coder;
 import com.falsepattern.laggoggles.util.Graphical;
-import io.netty.buffer.ByteBuf;
 import com.falsepattern.lib.compat.BlockPos;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
 
 import java.util.Map;
 import java.util.TreeMap;

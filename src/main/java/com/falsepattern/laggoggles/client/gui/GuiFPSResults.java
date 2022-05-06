@@ -1,6 +1,5 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import net.minecraft.client.Minecraft;

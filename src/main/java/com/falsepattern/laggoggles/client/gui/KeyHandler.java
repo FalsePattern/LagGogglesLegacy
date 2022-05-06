@@ -1,9 +1,9 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import net.minecraft.client.settings.KeyBinding;
 
 public class KeyHandler extends KeyBinding {
 

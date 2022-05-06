@@ -1,6 +1,5 @@
 package com.falsepattern.laggoggles.proxy;
 
-import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.ClientConfig;
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
@@ -8,15 +7,15 @@ import com.falsepattern.laggoggles.client.gui.KeyHandler;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
 import com.falsepattern.lib.config.ConfigurationManager;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import lombok.SneakyThrows;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
+import lombok.SneakyThrows;
+import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
 import static com.falsepattern.laggoggles.client.ServerDataPacketHandler.RECEIVED_RESULT;

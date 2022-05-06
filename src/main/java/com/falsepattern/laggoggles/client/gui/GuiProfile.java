@@ -1,6 +1,5 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.client.gui.buttons.DonateButton;
 import com.falsepattern.laggoggles.client.gui.buttons.DownloadButton;
@@ -9,10 +8,11 @@ import com.falsepattern.laggoggles.client.gui.buttons.ProfileButton;
 import com.falsepattern.laggoggles.packet.CPacketRequestResult;
 import com.falsepattern.laggoggles.packet.CPacketRequestScan;
 import com.falsepattern.laggoggles.packet.SPacketMessage;
+import com.falsepattern.laggoggles.profiler.ProfileManager;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
+import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.util.Perms;
-import com.falsepattern.laggoggles.profiler.ProfileManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

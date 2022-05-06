@@ -1,6 +1,5 @@
 package com.falsepattern.laggoggles.client.gui;
 
-import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
@@ -8,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 
-import java.io.IOException;
 import java.util.TreeMap;
 
 public class GuiScanResultsWorld extends GuiScreen {
