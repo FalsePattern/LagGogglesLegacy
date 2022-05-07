@@ -14,6 +14,7 @@ import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.always;
 public enum Mixin implements IMixin {
     //region vanilla
         //region common
+            MixinASMEventHandlerMixin(Side.COMMON, always(), "vanilla.MixinASMEventHandler"),
             MixinEntity(Side.COMMON, always(), "vanilla.MixinEntity"),
             MixinEventBus(Side.COMMON, always(), "vanilla.MixinEventBus"),
             MixinWorld(Side.COMMON, always(), "vanilla.MixinWorld"),

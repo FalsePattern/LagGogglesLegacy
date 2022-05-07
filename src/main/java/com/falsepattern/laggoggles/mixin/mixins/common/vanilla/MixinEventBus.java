@@ -1,6 +1,6 @@
 package com.falsepattern.laggoggles.mixin.mixins.common.vanilla;
 
-import com.falsepattern.laggoggles.util.ASMEventHandler;
+import com.falsepattern.laggoggles.util.IMixinASMEventHandler;
 import com.google.common.base.Throwables;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static com.falsepattern.laggoggles.profiler.ProfileManager.PROFILE_ENABLED;
 import static com.falsepattern.laggoggles.profiler.ProfileManager.timingManager;
 
-@Mixin(value = EventBus.class, remap = false, priority = 1001)
+@Mixin(value = EventBus.class, remap = false)
 public abstract class MixinEventBus implements IEventExceptionHandler {
 
     @Shadow
@@ -36,8 +36,8 @@ public abstract class MixinEventBus implements IEventExceptionHandler {
                 listeners[index].invoke(event);
                 long nanos = System.nanoTime() - LAGGOGGLES_START;
 
-                if(listeners[index] instanceof ASMEventHandler) {
-                    ModContainer mod = ((ASMEventHandler) listeners[index]).getOwner();
+                if(listeners[index] instanceof IMixinASMEventHandler) {
+                    ModContainer mod = ((IMixinASMEventHandler) listeners[index]).getOwner();
                     if (mod != null) {
                         String identifier = mod.getName() + " (" + mod.getSource().getName() + ")";
                         timingManager.addEventTime(identifier, event, nanos);
