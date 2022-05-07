@@ -13,12 +13,14 @@ import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.util.Perms;
+import com.falsepattern.lib.compat.GuiLabel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GuiProfile extends GuiScreen {
 
@@ -41,6 +43,9 @@ public class GuiProfile extends GuiScreen {
     private DownloadButton downloadButton;
     private GuiButton optionsButton;
     private boolean initialized = false;
+
+    protected List<GuiLabel> labelList;
+
     public int seconds = Math.min(30, ServerDataPacketHandler.MAX_SECONDS);
 
     public GuiProfile(){
@@ -83,19 +88,28 @@ public class GuiProfile extends GuiScreen {
 
         showToggle.enabled = profileLoaded;
         analyzeResults.enabled = profileLoaded;
-//        TODO
-//        addButton(startProfile);
-//        addButton(showToggle);
-//        addButton(analyzeResults);
-//        addButton(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
-//        addButton(optionsButton);
-//        GuiLabel scrollHint = new GuiLabel(fontRenderer, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
-//        scrollHint.addLine("Scroll while hovering over the button");
-//        scrollHint.addLine("to change time time!");
-//        labelList.add(scrollHint);
-//        addButton(downloadButton);
+        this.buttonList.add(startProfile);
+        this.buttonList.add(showToggle);
+        this.buttonList.add(analyzeResults);
+        this.buttonList.add(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
+        this.buttonList.add(optionsButton);
+        GuiLabel scrollHint = new GuiLabel(fontRendererObj, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
+        scrollHint.addLine("Scroll while hovering over the button");
+        scrollHint.addLine("to change time time!");
+        labelList.add(scrollHint);
+        this.buttonList.add(downloadButton);
         initialized = true;
         updateButton();
+    }
+
+    @Override
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+
+
+        for (GuiLabel guiLabel : this.labelList) {
+            guiLabel.drawLabel(this.mc, p_73863_1_, p_73863_2_);
+        }
     }
 
     private Runnable buttonUpdateTask = new Runnable() {
@@ -144,24 +158,26 @@ public class GuiProfile extends GuiScreen {
 
     @Override
     public void handleMouseInput() {
+
+        int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int y = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
         if(initialized == false){
             return;
         }
-        //TODO
-//        if(startProfile.isMouseOver() && startProfile.enabled){
-//            int wheel = Mouse.getDWheel();
-//            if(wheel != 0) {
-//                seconds = seconds + ((wheel / 120) * 5); /* 1 Click is 120, 1 click is 5 seconds */
-//                seconds = Math.max(seconds, 5);
-//                boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
-//                seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
-//                if(triedMore){
-//                    startProfile.displayString = "Limited to " + seconds + " seconds.";
-//                }else {
-//                    startProfile.displayString = "Profile for " + seconds + " seconds";
-//                }
-//            }
-//        }
+        if(startProfile.mousePressed(mc, x, y) && startProfile.enabled){
+            int wheel = Mouse.getDWheel();
+            if(wheel != 0) {
+                seconds = seconds + ((wheel / 120) * 5); /* 1 Click is 120, 1 click is 5 seconds */
+                seconds = Math.max(seconds, 5);
+                boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
+                seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
+                if(triedMore){
+                    startProfile.displayString = "Limited to " + seconds + " seconds.";
+                }else {
+                    startProfile.displayString = "Profile for " + seconds + " seconds";
+                }
+            }
+        }
         super.handleMouseInput();
         Mouse.getDWheel();
     }
@@ -186,10 +202,12 @@ public class GuiProfile extends GuiScreen {
     }
 
     @Override
-    public void actionPerformed(GuiButton gui){
-        switch (gui.id){
+    public void actionPerformed(GuiButton button){
+        switch (button.id){
             case BUTTON_START_PROFILE_ID:
-                startProfile.click(this,buttonList);
+                int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
+                int y = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+                startProfile.click(this, buttonList, x, y);
                 break;
             case BUTTON_SHOW_TOGGLE:
                 if(LagOverlayGui.isShowing()) {
@@ -206,9 +224,10 @@ public class GuiProfile extends GuiScreen {
             case BUTTON_DONATE:
                 DonateButton.donate();
                 break;
-            case BUTTON_OPTIONS:
-                mc.displayGuiScreen(new GuiInGameConfig(this));
-                break;
+                //TODO
+//            case BUTTON_OPTIONS:
+//                mc.displayGuiScreen(new GuiInGameConfig(this));
+//                break;
             case BUTTON_DOWNLOAD:
                 ClientProxy.NETWORK_WRAPPER.sendToServer(new CPacketRequestResult());
                 break;

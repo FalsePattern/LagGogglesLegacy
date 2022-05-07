@@ -35,18 +35,20 @@ public class ClientProxy extends CommonProxy {
         super.postinit(e);
         ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Tags.MODID, () -> Minecraft.getMinecraft().displayGuiScreen(new GuiProfile())));
 
-        FMLCommonHandler.instance().bus().register(new Object(){
-            @SubscribeEvent
-            public void onLogin(FMLNetworkEvent.ClientConnectedToServerEvent e){
-                RECEIVED_RESULT = false;
-                LagOverlayGui.destroy();
-                LAST_PROFILE_RESULT.set(null);
-                new ClientLoginAction().activate();
-            }
-        });
+        FMLCommonHandler.instance().bus().register(new LoginHandler());
     }
 
-    private static class ClientLoginAction {
+    public static class LoginHandler {
+        @SubscribeEvent
+        public void onLogin(FMLNetworkEvent.ClientConnectedToServerEvent e){
+            RECEIVED_RESULT = false;
+            LagOverlayGui.destroy();
+            LAST_PROFILE_RESULT.set(null);
+            new ClientLoginAction().activate();
+        }
+    }
+
+    public static class ClientLoginAction {
 
         int count = 0;
 

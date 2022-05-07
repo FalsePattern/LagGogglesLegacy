@@ -88,7 +88,7 @@ public class ProfileManager {
                                 continue;
                             }
                             for(Map.Entry<UUID, Long> entityTimes : entry.getValue().getEntityTimes().entrySet()){
-                                Entity e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getUniqueID().equals(entityTimes.getKey())).findFirst().orElse(null);
+                                Entity e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getPersistentID().equals(entityTimes.getKey())).findFirst().orElse(null);
                                 if(e == null){
                                     continue;
                                 }
@@ -193,7 +193,7 @@ public class ProfileManager {
     public static void insertGuiData(ProfileResult result, TimingManager timings) {
         TreeMap<UUID, Long> entityTimes = timings.getGuiEntityTimings();
         for (Entity e : (List<Entity>)Minecraft.getMinecraft().theWorld.loadedEntityList) {
-            Long time = entityTimes.get(e.getUniqueID());
+            Long time = entityTimes.get(e.getPersistentID());
             if (time == null) {
                 continue;
             }

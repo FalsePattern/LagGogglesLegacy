@@ -51,7 +51,7 @@ public class Perms {
         for(UUID uuid : RequestDataHandler.playersWithLagGoggles){
             Entity entity = Arrays.stream(server.worldServers)
                                   .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
-                                  .filter((ent) -> ent.getUniqueID().equals(uuid))
+                                  .filter((ent) -> ent.getPersistentID().equals(uuid))
                                   .findFirst()
                                   .orElse(null);
             if(entity instanceof EntityPlayerMP){
@@ -90,7 +90,7 @@ public class Perms {
                 WorldServer world = DimensionManager.getWorld(data.getValue(ObjectData.Entry.WORLD_ID));
                 Entity e;
                 val uuid = data.getValue(ObjectData.Entry.ENTITY_UUID);
-                if(world != null && (e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getUniqueID().equals(uuid))
+                if(world != null && (e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getPersistentID().equals(uuid))
                                                                                     .findFirst()
                                                                                     .orElse(null)) != null){
                     return checkRange(player, e.posX, e.posY, e.posZ);

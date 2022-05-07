@@ -16,10 +16,9 @@ import static com.falsepattern.laggoggles.profiler.ProfileManager.timingManager;
 public abstract class MixinEntity {
 
     @Shadow
-    protected UUID entityUniqueID;
-
-    @Shadow
     public int dimension;
+
+    @Shadow public abstract UUID getPersistentID();
 
     private Long LAGGOGGLES_START = null;
 
@@ -35,7 +34,7 @@ public abstract class MixinEntity {
             require = 1)
     private void onEntityUpdateRETURN(CallbackInfo info){
         if(PROFILE_ENABLED.get() && LAGGOGGLES_START != null){
-            timingManager.addEntityTime(dimension, entityUniqueID, System.nanoTime() - LAGGOGGLES_START);
+            timingManager.addEntityTime(dimension, this.getPersistentID(), System.nanoTime() - LAGGOGGLES_START);
         }
     }
 

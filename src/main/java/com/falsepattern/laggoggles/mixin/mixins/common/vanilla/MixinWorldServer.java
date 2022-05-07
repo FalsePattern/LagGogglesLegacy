@@ -2,6 +2,7 @@ package com.falsepattern.laggoggles.mixin.mixins.common.vanilla;
 
 import com.falsepattern.lib.compat.BlockPos;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
@@ -33,7 +34,7 @@ public abstract class MixinWorldServer extends World {
                        target = "Lnet/minecraft/block/Block;updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V"),
               require = 1)
     private void measureBlockUpdateTick(Block instance, World world, int x, int y, int z, Random rng) {
-        if (PROFILE_ENABLED.get()) {
+        if (PROFILE_ENABLED.get() && instance != Blocks.air) {
             long start = System.nanoTime();
             instance.updateTick(world, x, y, z, rng);
             long end = System.nanoTime();

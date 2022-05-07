@@ -10,7 +10,7 @@ import net.minecraft.util.EnumChatFormatting;
 public class ClickableLink {
 
     public static ChatComponentText getLink(String link){
-        val text = FormattedText.parse(EnumChatFormatting.BLUE + link).toChatText();
+        val text = FormattedText.parse(EnumChatFormatting.BLUE + link).toChatText().get(0);
         val style = text.getChatStyle();
         style.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, link));
         return text;

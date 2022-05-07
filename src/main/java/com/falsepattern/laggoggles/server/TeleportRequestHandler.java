@@ -32,7 +32,7 @@ public class TeleportRequestHandler implements IMessageHandler<CPacketRequestEnt
             public void run() {
                 Entity e = Arrays.stream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServers)
                                  .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
-                                 .filter((entity) -> entity.getUniqueID().equals(message.uuid))
+                                 .filter((entity) -> entity.getPersistentID().equals(message.uuid))
                                  .findFirst()
                                  .orElse(null);
                 if(e == null){

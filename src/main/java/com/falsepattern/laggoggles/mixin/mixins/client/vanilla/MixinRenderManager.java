@@ -30,7 +30,7 @@ public class MixinRenderManager {
     public void afterRender(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfoReturnable<Boolean> cir){
         if(PROFILE_ENABLED.get() && LAGGOGGLES_START != null){
             long end = System.nanoTime();
-            timingManager.addGuiEntityTime(entityIn.getUniqueID(), end - LAGGOGGLES_START);
+            timingManager.addGuiEntityTime(entityIn.getPersistentID(), end - LAGGOGGLES_START);
             LAGGOGGLES_START = null;
         }
     }

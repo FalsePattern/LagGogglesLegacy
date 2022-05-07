@@ -2,7 +2,9 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import org.lwjgl.input.Mouse;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public abstract class SplitButton extends GuiButton{
     }
 
 
-    public void click(GuiProfile parent, List<GuiButton> buttonList){
+    public void click(GuiProfile parent, List<GuiButton> buttonList, int x, int y){
         if(lastClick + 50 > System.currentTimeMillis()){
             return;
         }
@@ -44,12 +46,11 @@ public abstract class SplitButton extends GuiButton{
             buttonList.add(this);
             buttonList.remove(clientButton);
             buttonList.remove(serverButton);
-            //TODO
-//            if(serverButton.isMouseOver()){
-//                onWorldClick(parent);
-//            }else if(clientButton.isMouseOver()){
-//                onFPSClick(parent);
-//            }
+            if (serverButton.mousePressed(parent.mc, x, y)) {
+                onWorldClick(parent);
+            } else if (clientButton.mousePressed(parent.mc, x, y)) {
+                onFPSClick(parent);
+            }
             state = NORMAL;
         }
     }
