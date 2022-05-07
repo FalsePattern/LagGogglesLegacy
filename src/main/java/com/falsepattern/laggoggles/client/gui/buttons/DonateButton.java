@@ -5,6 +5,7 @@ import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.FakeIIcon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.IIcon;
 
@@ -26,7 +27,7 @@ public class DonateButton extends GuiButton {
     }
 
     public DonateButton(int buttonId, int x, int y) {
-        super(buttonId, x, y, 90, 20, "Donate");
+        super(buttonId, x, y, 90, 20, I18n.format("gui.laggoggles.button.donate.name"));
     }
 
     @Override

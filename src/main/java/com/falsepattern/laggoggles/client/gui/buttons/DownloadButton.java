@@ -7,6 +7,7 @@ import com.falsepattern.lib.text.FormattedText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -34,17 +35,14 @@ public class DownloadButton extends GuiButton{
         drawTexturedModelRectFromIcon(xPosition + 3, yPosition + 3, icon, 14, 14);
         if (this.mousePressed(mc, mouseX, mouseY)) {
             ArrayList<String> hover = new ArrayList<>();
-            hover.add("Download the latest available");
-            hover.add("world result from the server.");
+            hover.add(I18n.format("gui.laggoggles.button.download.hover"));
             if(PERMISSION != Perms.Permission.FULL) {
                 hover.add("");
-                hover.add("Because you're not opped, the results");
-                hover.add("will be trimmed to your surroundings");
+                hover.add(I18n.format("gui.laggoggles.button.download.hover.notop"));
 
                 if(getSecondsLeftForMessage() >= 0){
                     hover.add("");
-                    hover.add(EnumChatFormatting.GRAY + "Remember: There's a cooldown on this, you");
-                    hover.add(EnumChatFormatting.GRAY + "may have to wait before you can use it again.");
+                    hover.add(EnumChatFormatting.GRAY + I18n.format("gui.laggoggles.button.download.hover.cooldown"));
                 }
             }
             FormattedText.parse(String.join("\n", hover)).drawWithShadow(mc.fontRenderer, mouseX, mouseY);

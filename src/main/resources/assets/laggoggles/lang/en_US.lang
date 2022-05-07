@@ -1,0 +1,14 @@
+#PARSE_ESCAPES
+config.laggoggles.client.gradientworld=Gradient maxed out at microseconds
+config.laggoggles.client.gradientworld.tooltip=Define the number of microseconds at which an object is marked with a deep red colour for WORLD lag.
+config.laggoggles.client.gradientfps=Gradient maxed out at nanoseconds fps
+config.laggoggles.client.gradientfps.tooltip=Define the number of nanoseconds at which an object is marked with a deep red colour for FPS lag.
+config.laggoggles.client.minmicros=Minimum amount of microseconds threshold
+config.laggoggles.client.minmicros.tooltip=What is the minimum amount of microseconds required before an object is tracked in the client?\nThis is only for WORLD lag.\nThis also affects the analyze results window
+config.laggoggles.client.colors=Colors
+config.laggoggles.client.colors.tooltip=If you're colorblind, change this to fit your needs.
+gui.laggoggles.button.donate.name=Donate
+gui.laggoggles.button.download.hover=Download the latest available\nworld result from the server.
+gui.laggoggles.button.download.hover.notop=Because you're not opped, the results\nwill be trimmed to your surroundings.
+gui.laggoggles.button.download.hover.cooldown=Remember: There's a cooldown on this, you\nmay have to wait before you can use it again.
+gui.laggoggles.button.options.name=Options
