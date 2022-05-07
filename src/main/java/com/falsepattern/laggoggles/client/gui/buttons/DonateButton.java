@@ -2,9 +2,11 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
+import com.falsepattern.laggoggles.client.gui.FakeIIcon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.IIcon;
 
 import java.awt.*;
 import java.net.URI;
@@ -13,6 +15,7 @@ import java.net.URISyntaxException;
 public class DonateButton extends GuiButton {
 
     private ResourceLocation DONATE_TEXTURE = new ResourceLocation(Tags.MODID, "donate.png");
+    private static final IIcon icon = new FakeIIcon(14, 14);
     private static final URI DONATE_URL;
     static {
         try {
@@ -30,7 +33,7 @@ public class DonateButton extends GuiButton {
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         super.drawButton(mc, mouseX, mouseY);
         mc.getTextureManager().bindTexture(DONATE_TEXTURE);
-        drawTexturedModalRect(xPosition + 3, yPosition + 3, 0, 0, 14, 14);
+        drawTexturedModelRectFromIcon(xPosition + 3, yPosition + 3, icon, 14, 14);
     }
 
 
