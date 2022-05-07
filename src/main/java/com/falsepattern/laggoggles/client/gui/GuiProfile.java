@@ -49,6 +49,7 @@ public class GuiProfile extends GuiScreen {
     private ProfileButton startProfile;
     private DownloadButton downloadButton;
     private GuiButton optionsButton;
+    private DonateButton donateButton;
     private boolean initialized = false;
 
     protected List<GuiLabel> labelList;
@@ -85,12 +86,17 @@ public class GuiProfile extends GuiScreen {
         int centerY = height/2;
 
         boolean profileLoaded = ProfileManager.LAST_PROFILE_RESULT.get() != null;
-
-        startProfile = new ProfileButton(BUTTON_START_PROFILE_ID, centerX - 100, centerY - 25, I18n.format("gui.laggoggles.text.profile.start", seconds));
-        downloadButton = new DownloadButton(this, BUTTON_DOWNLOAD, centerX + 80, centerY - 25);
-        optionsButton = new OptionsButton(BUTTON_OPTIONS, centerX - 100, centerY + 75);
-        GuiButton showToggle  = new GuiButton(BUTTON_SHOW_TOGGLE, centerX - 100, centerY +  5, LagOverlayGui.isShowing() ? I18n.format("gui.laggoggles.text.profile.hide") : I18n.format("gui.laggoggles.text.profile.show"));
-        GuiButton analyzeResults  = new GuiButton(BUTTON_ANALYZE_RESULTS, centerX - 100, centerY +  30, I18n.format("gui.laggoggles.text.profile.analyze"));
+        int y = centerY - 25;
+        startProfile = new ProfileButton(BUTTON_START_PROFILE_ID, centerX - 100, y, I18n.format("gui.laggoggles.text.profile.start", seconds));
+        downloadButton = new DownloadButton(this, BUTTON_DOWNLOAD, centerX + 80, y);
+        y += 25;
+        GuiButton showToggle  = new GuiButton(BUTTON_SHOW_TOGGLE, centerX - 100, y, LagOverlayGui.isShowing() ? I18n.format("gui.laggoggles.text.profile.hide") : I18n.format("gui.laggoggles.text.profile.show"));
+        y += 25;
+        GuiButton analyzeResults  = new GuiButton(BUTTON_ANALYZE_RESULTS, centerX - 100, y, I18n.format("gui.laggoggles.text.profile.analyze"));
+        y += 25;
+        optionsButton = new OptionsButton(BUTTON_OPTIONS, centerX - 100, y);
+        y += 25;
+        donateButton = new DonateButton(BUTTON_DONATE, centerX - 100, y);
 
 
         showToggle.enabled = profileLoaded;
@@ -98,7 +104,7 @@ public class GuiProfile extends GuiScreen {
         this.buttonList.add(startProfile);
         this.buttonList.add(showToggle);
         this.buttonList.add(analyzeResults);
-        this.buttonList.add(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
+        this.buttonList.add(donateButton);
         this.buttonList.add(optionsButton);
         GuiLabel scrollHint = new GuiLabel(fontRendererObj, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
         for (val line: I18n.format("gui.laggoggles.text.profile.scrollhint", '\n').split("\n")) {
@@ -211,10 +217,10 @@ public class GuiProfile extends GuiScreen {
     @SneakyThrows
     @Override
     public void actionPerformed(GuiButton button){
+        int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int y = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
         switch (button.id){
             case BUTTON_START_PROFILE_ID:
-                int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
-                int y = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
                 startProfile.click(this, buttonList, x, y);
                 break;
             case BUTTON_SHOW_TOGGLE:
@@ -230,9 +236,8 @@ public class GuiProfile extends GuiScreen {
                 analyzeResults();
                 break;
             case BUTTON_DONATE:
-                DonateButton.donate();
+                donateButton.click(this, buttonList, x, y);
                 break;
-                //TODO
             case BUTTON_OPTIONS:
                 mc.displayGuiScreen(new GuiConfig(this, ConfigurationManager.getConfigElements(ClientConfig.class), Tags.MODID, false, false, Tags.MODNAME + " Configuration", "Hover with the mouse over a variable to see a description"));
                 break;

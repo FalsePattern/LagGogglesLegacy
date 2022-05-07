@@ -11,6 +11,6 @@
       "credits": "",
       "logoFile": "assets/laggoggles/logo.png",
       "screenshots": [],
-      "dependencies": []
+      "dependencies": ["falsepatternlib"]
     }
 ]

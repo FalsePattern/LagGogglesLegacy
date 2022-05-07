@@ -3,6 +3,7 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 import com.falsepattern.laggoggles.Main;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.FakeIIcon;
+import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -13,21 +14,14 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class DonateButton extends GuiButton {
+public class DonateButton extends SplitButton<DonateButtonSmall> {
 
     private ResourceLocation DONATE_TEXTURE = new ResourceLocation(Tags.MODID, "donate.png");
     private static final IIcon icon = new FakeIIcon(14, 14);
-    private static final URI DONATE_URL;
-    static {
-        try {
-            DONATE_URL = new URI("https://www.paypal.com/cgi-bin/webscr?return=https://minecraft.curseforge.com/projects/laggoggles?gameCategorySlug=mc-mods&projectID=283525&cn=Add+special+instructions+to+the+addon+author()&business=leon.philips12%40gmail.com&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted&cancel_return=https://minecraft.curseforge.com/projects/laggoggles?gameCategorySlug=mc-mods&projectID=283525&lc=US&item_name=LagGoggles+(from+curseforge.com)&cmd=_donations&rm=1&no_shipping=1&currency_code=USD");
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public DonateButton(int buttonId, int x, int y) {
-        super(buttonId, x, y, 90, 20, I18n.format("gui.laggoggles.button.donate.name"));
+        super(buttonId, x, y, 200, 20, I18n.format("gui.laggoggles.button.donate.name"),
+                "Terminator_NL", "FalsePattern", DonateButtonSmall::new);
     }
 
     @Override
@@ -37,18 +31,13 @@ public class DonateButton extends GuiButton {
         drawTexturedModelRectFromIcon(xPosition + 3, yPosition + 3, icon, 14, 14);
     }
 
+    @Override
+    public void onRightButton(GuiProfile parent) {
+        rightButton.donate();
+    }
 
-    public static void donate(){
-        Main.LOGGER.info("Attempting to open link in browser: " + DONATE_URL.toString());
-        try {
-            if(Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                Desktop.getDesktop().browse(DONATE_URL);
-            }else {
-                Main.LOGGER.info("Attempting xdg-open...");
-                Runtime.getRuntime().exec("xdg-open " + DONATE_URL.toString());
-            }
-        }catch (Throwable e){
-            e.printStackTrace();
-        }
+    @Override
+    public void onLeftButton(GuiProfile parent) {
+        leftButton.donate();
     }
 }

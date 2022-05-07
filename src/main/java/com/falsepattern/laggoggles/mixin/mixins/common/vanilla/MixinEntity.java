@@ -18,7 +18,8 @@ public abstract class MixinEntity {
     @Shadow
     public int dimension;
 
-    @Shadow public abstract UUID getPersistentID();
+    @Shadow(remap = false)
+    public abstract UUID getPersistentID();
 
     private Long LAGGOGGLES_START = null;
 

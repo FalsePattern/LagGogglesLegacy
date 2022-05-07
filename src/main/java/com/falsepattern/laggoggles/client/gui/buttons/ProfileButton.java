@@ -10,31 +10,35 @@ import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.util.Perms;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 
-public class ProfileButton extends SplitButton {
+public class ProfileButton extends SplitButton<GuiButton> {
 
     public static Thread PROFILING_THREAD;
     private long frames = 0;
     public ProfileButton(int buttonId, int x, int y, String text) {
-        super(buttonId, x, y, 170, 20, text);
+        super(buttonId, x, y, 170, 20, text,
+                I18n.format("gui.laggoggles.button.profile.fps.name"),
+                I18n.format("gui.laggoggles.button.profile.world.name"),
+                GuiButton::new);
     }
 
     @Override
-    public void onWorldClick(GuiProfile parent) {
+    public void onRightButton(GuiProfile parent) {
         parent.startProfile();
     }
 
     @Override
     public void updateButtons(){
         if(ServerDataPacketHandler.PERMISSION.ordinal() < Perms.Permission.START.ordinal()) {
-            serverButton.enabled = false;
-            serverButton.displayString = I18n.format("gui.laggoggles.button.profile.server.noperms");
+            rightButton.enabled = false;
+            rightButton.displayString = I18n.format("gui.laggoggles.button.profile.server.noperms");
         }
     }
 
     @Override
-    public void onFPSClick(GuiProfile parent) {
+    public void onLeftButton(GuiProfile parent) {
         final int seconds = parent.seconds;
         if(PROFILING_THREAD == null || PROFILING_THREAD.isAlive() == false){
             PROFILING_THREAD = new Thread(new Runnable() {
