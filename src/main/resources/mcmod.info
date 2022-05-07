@@ -9,7 +9,7 @@
       "updateUrl": "",
       "authorList": ["Terminator_NL", "FalsePattern"],
       "credits": "",
-      "logoFile": "/assets/laggoggles/client/gui/logo.png",
+      "logoFile": "assets/laggoggles/logo.png",
       "screenshots": [],
       "dependencies": []
     }
