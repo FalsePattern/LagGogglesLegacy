@@ -3,6 +3,7 @@ package com.falsepattern.laggoggles.client;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 public class FPSCounter {
 
@@ -15,11 +16,11 @@ public class FPSCounter {
 
     public void start(){
         frames = 0;
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public long stop(){
-        FMLCommonHandler.instance().bus().unregister(this);
+        MinecraftForge.EVENT_BUS.unregister(this);
         return frames;
     }
 }

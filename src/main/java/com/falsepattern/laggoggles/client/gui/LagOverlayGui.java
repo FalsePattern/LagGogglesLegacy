@@ -15,6 +15,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -413,7 +414,7 @@ public class LagOverlayGui {
     }
 
     private void _hide(){
-        FMLCommonHandler.instance().bus().unregister(this);
+        MinecraftForge.EVENT_BUS.unregister(this);
         quickText.hide();
         isShowing.set(false);
     }
@@ -421,7 +422,7 @@ public class LagOverlayGui {
     private void _show(){
         isShowing.set(true);
         new Thread(TIMELY_UPDATES).start();
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
         quickText.show();
     }
 
