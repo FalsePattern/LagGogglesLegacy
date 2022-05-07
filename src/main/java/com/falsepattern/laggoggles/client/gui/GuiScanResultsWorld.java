@@ -58,15 +58,6 @@ public class GuiScanResultsWorld extends GuiScreen {
         return false;
     }
 
-
-    @Override
-    public void handleMouseInput() {
-        super.handleMouseInput();
-        guiSingleEntities.handleMouseInput();
-        guiEntityTypes.handleMouseInput();
-        guiEventTypes.handleMouseInput();
-    }
-
     private void drawString(String text, int x, int y, int color) {
         FONTRENDERER.drawStringWithShadow(text,  x, y, color);
     }

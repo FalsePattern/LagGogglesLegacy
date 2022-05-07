@@ -1,5 +1,7 @@
 package com.falsepattern.laggoggles.client.gui;
 
+import com.falsepattern.laggoggles.Tags;
+import com.falsepattern.laggoggles.client.ClientConfig;
 import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.client.gui.buttons.DonateButton;
 import com.falsepattern.laggoggles.client.gui.buttons.DownloadButton;
@@ -14,6 +16,9 @@ import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.compat.GuiLabel;
+import com.falsepattern.lib.config.ConfigurationManager;
+import cpw.mods.fml.client.config.GuiConfig;
+import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -179,7 +184,6 @@ public class GuiProfile extends GuiScreen {
             }
         }
         super.handleMouseInput();
-        Mouse.getDWheel();
     }
 
     public void startProfile(){
@@ -201,6 +205,7 @@ public class GuiProfile extends GuiScreen {
         }
     }
 
+    @SneakyThrows
     @Override
     public void actionPerformed(GuiButton button){
         switch (button.id){
@@ -225,9 +230,9 @@ public class GuiProfile extends GuiScreen {
                 DonateButton.donate();
                 break;
                 //TODO
-//            case BUTTON_OPTIONS:
-//                mc.displayGuiScreen(new GuiInGameConfig(this));
-//                break;
+            case BUTTON_OPTIONS:
+                mc.displayGuiScreen(new GuiConfig(this, ConfigurationManager.getConfigElements(ClientConfig.class), Tags.MODID, false, false, Tags.MODNAME + " Configuration", "Hover with the mouse over a variable to see a description"));
+                break;
             case BUTTON_DOWNLOAD:
                 ClientProxy.NETWORK_WRAPPER.sendToServer(new CPacketRequestResult());
                 break;

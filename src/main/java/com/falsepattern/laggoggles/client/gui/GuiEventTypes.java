@@ -82,10 +82,6 @@ public class GuiEventTypes extends GuiScrollingList {
 
     }
 
-    public void handleMouseInput() {
-        //TODO super.handleMouseInput(left, top);
-    }
-
     public void displayCantSeeResults(int slotTop){
         drawString("You can't see these results because the", left + 10, slotTop, 0x4C4C4C);
         drawString("server has disabled it in their config.", left + 10, slotTop + 12, 0x4C4C4C);

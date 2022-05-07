@@ -107,10 +107,6 @@ public class GuiEntityTypes extends GuiScrollingList {
 
     }
 
-    public void handleMouseInput() {
-        //TODO super.handleMouseInput(left, top);
-    }
-
     @Override
     protected void drawSlot(int slot, int entryRight, int slotTop, int slotBuffer, Tessellator tess) {
         if(slot == -1){
