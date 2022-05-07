@@ -25,10 +25,10 @@ public class ServerConfig {
     public static int NON_OPS_PROFILE_COOL_DOWN_SECONDS = 120;
 
     @Config.Comment("What is the maximum HORIZONTAL range in blocks normal users can get results for?")
-    public static double NON_OPS_MAX_HORIZONTAL_RANGE = 50;
+    public static float NON_OPS_MAX_HORIZONTAL_RANGE = 50;
 
     @Config.Comment("What is the maximum VERTICAL range in blocks normal users can get results for?")
-    public static double NON_OPS_MAX_VERTICAL_RANGE = 20;
+    public static float NON_OPS_MAX_VERTICAL_RANGE = 20;
 
     @Config.Comment("From where should we range-limit blocks vertically for normal users?\n" +
                     "This will override the MAX_VERTICAL_RANGE when the block is above this Y level")
