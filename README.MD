@@ -1,13 +1,23 @@
-# LagGoggles Legacy <img height="70" src="docs/logo.png">
-Intuitive lag hunting!<br>
-LagGoggles is a profiler where you can see timings in the world, visually. It comes with a custom GUI using a configurable keybind. It's compatible with [SpongeForge](https://github.com/SpongePowered/SpongeForge) and [Mixin](https://github.com/SpongePowered/Mixin)!<br>
-You can use LagGoggles as a player too! This is my attempt to create an understanding of what causes lag on a server to regular players.<br>
-I noticed some common misconceptions like having machines spread out over different chunks causes less lag than putting it in one chunk.<br>
+# LagGoggles Legacy
+
+<img height="300" src="docs/logo.png">
+
+A backport of [TerminatorNL](https://github.com/TerminatorNL)'s LagGoggles to 1.7.10, licensed under GPLv3!
+
+Intuitive lag hunting!
+
+LagGoggles is a profiler where you can see timings in the world, visually. It comes with a custom GUI using a
+configurable keybind. [FalsePatternLib](https://www.curseforge.com/minecraft/mc-mods/falsepatternlib) and either [SpongeMixins](https://www.curseforge.com/minecraft/mc-mods/spongemixins) or [Grimoire](https://www.curseforge.com/minecraft/mc-mods/grimoire-api)!
+
+You can use LagGoggles as a player too! This is my attempt to create an understanding of what causes lag on a server to regular players.
+
+I noticed some common misconceptions like having machines spread out over different chunks causes less lag than putting it in one chunk.
+
 With LagGoggles, you can look around and see that alot of small things like pipes or cables cause a tiny bit of lag most of the time, often resulting in more lag than a machine right next to the source would.
 
 LagGoggles can also profile clientside FPS as of version 4.0!
 
-### Download: [here](https://minecraft.curseforge.com/projects/laggoggles/files)
+### Download: Check the github releases. CurseForge release soon.
 
 ## Screenshots
 
@@ -31,7 +41,6 @@ Massive thanks to [Grok DuckFarmer](https://www.youtube.com/channel/UCoKMLbTK35p
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/2ALrIvw1S4I/0.jpg)](http://www.youtube.com/watch?v=2ALrIvw1S4I)
 
 ## Features
-* Sponge compatible (Try the THIN version first!)
 * Teleporting to sources of lag
 * Client GUI, including overlay and clickable menus
 * Colour scale for easy spotting of sources of lag.
@@ -51,8 +60,6 @@ Massive thanks to [Grok DuckFarmer](https://www.youtube.com/channel/UCoKMLbTK35p
 * Clients can edit the config to change the colour scale.
 
 ## How it works
-At startup [Mixin](https://github.com/SpongePowered/Mixin) handles each class being loaded. On the server side, this mod hooks into the loading mechanism. This is the same mechanism [SpongeForge](https://github.com/SpongePowered/SpongeForge) uses, that's why it's compatible.<br>
-<br>
 Entities, blocks and event-subscribers are timed using System.nanotime() before and after the tick() and update() methods. These times are being recorded and sent to the client when the profiler is done.
 
 ## Benefits
@@ -60,4 +67,6 @@ Entities, blocks and event-subscribers are timed using System.nanotime() before 
 * Learn your players to build lag-free bases.
 
 ## Dependencies
-You can download the latest release here. The ONLY difference between THIN and FAT is that **FAT ships Mixin, which is a library that LagGoggles needs in order to function.** It's possible that another mod already ships Mixin or has another version. Generally speaking, LagGoggles can handle most Mixin releases well. A known mod to ship Mixin is SpongeForge. **If you have SpongeForge or another mod that requires a different version of Mixin, choose the THIN release**.
+[FalsePatternLib](https://www.curseforge.com/minecraft/mc-mods/falsepatternlib)
+
+[SpongeMixins](https://www.curseforge.com/minecraft/mc-mods/spongemixins) or [Grimoire](https://www.curseforge.com/minecraft/mc-mods/grimoire-api)
