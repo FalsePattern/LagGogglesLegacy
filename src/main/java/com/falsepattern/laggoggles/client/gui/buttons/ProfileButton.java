@@ -10,6 +10,7 @@ import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.util.Perms;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 
 public class ProfileButton extends SplitButton {
 
@@ -28,7 +29,7 @@ public class ProfileButton extends SplitButton {
     public void updateButtons(){
         if(ServerDataPacketHandler.PERMISSION.ordinal() < Perms.Permission.START.ordinal()) {
             serverButton.enabled = false;
-            serverButton.displayString = "No perms";
+            serverButton.displayString = I18n.format("gui.laggoggles.button.profile.server.noperms");
         }
     }
 
@@ -40,7 +41,7 @@ public class ProfileButton extends SplitButton {
                 @Override
                 public void run() {
                     Main.LOGGER.info("Clientside profiling started. (" + seconds + " seconds)");
-                    QuickText text = new QuickText("Profiling FPS... For the best results, do not look around.");
+                    QuickText text = new QuickText(I18n.format("gui.laggoggles.text.fpswarning"));
                     GuiProfile.PROFILING_PLAYER = Minecraft.getMinecraft().thePlayer.getPersistentID().toString();
                     GuiProfile.PROFILE_END_TIME = System.currentTimeMillis() + (seconds * 1000L);
                     GuiProfile.update();

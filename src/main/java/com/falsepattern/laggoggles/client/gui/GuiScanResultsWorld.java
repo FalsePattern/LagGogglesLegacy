@@ -6,6 +6,7 @@ import com.falsepattern.laggoggles.profiler.ProfileResult;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 
 import java.util.TreeMap;
 
@@ -44,12 +45,12 @@ public class GuiScanResultsWorld extends GuiScreen {
         guiSingleEntities.drawScreen(mouseX, mouseY, partialTicks);
         guiEntityTypes.drawScreen(mouseX, mouseY, partialTicks);
         guiEventTypes.drawScreen(mouseX, mouseY, partialTicks);
-        drawString(Tags.MODNAME + ": profile data for WORLD scan results", 5, 5, 0xFFFFFF);
-        drawString("Times are presented in microseconds", 5, 15, 0xCCCCCC);
-        drawString("Single entities", 5, 35, 0xFFFFFF);
-        drawString(" (Doubleclick to teleport)", 5 + FONTRENDERER.getStringWidth("Single entities"), 35, 0x666666);
-        drawString("Entities by type", width/2 + 5, 35, 0xFFFFFF);
-        drawString("Event subscribers", width/2 + 5, ((height - 25)/2) + 2, 0xFFFFFF);
+        drawString(Tags.MODNAME + ": " + I18n.format("gui.laggoggles.text.worldresults.titledescription"), 5, 5, 0xFFFFFF);
+        drawString(I18n.format("gui.laggoggles.text.worldresults.present"), 5, 15, 0xCCCCCC);
+        drawString(I18n.format("gui.laggoggles.text.results.singleentities"), 5, 35, 0xFFFFFF);
+        drawString(" (" + I18n.format("gui.laggoggles.text.results.teleport") + ")", 5 + FONTRENDERER.getStringWidth(I18n.format("gui.laggoggles.text.results.singleentities")), 35, 0x666666);
+        drawString(I18n.format("gui.laggoggles.text.results.entitiesbytype"), width/2 + 5, 35, 0xFFFFFF);
+        drawString(I18n.format("gui.laggoggles.text.results.eventsub"), width/2 + 5, ((height - 25)/2) + 2, 0xFFFFFF);
     }
 
 

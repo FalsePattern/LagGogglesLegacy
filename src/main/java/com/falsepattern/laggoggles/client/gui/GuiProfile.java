@@ -19,9 +19,11 @@ import com.falsepattern.lib.compat.GuiLabel;
 import com.falsepattern.lib.config.ConfigurationManager;
 import cpw.mods.fml.client.config.GuiConfig;
 import lombok.SneakyThrows;
+import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
@@ -84,11 +86,11 @@ public class GuiProfile extends GuiScreen {
 
         boolean profileLoaded = ProfileManager.LAST_PROFILE_RESULT.get() != null;
 
-        startProfile = new ProfileButton(BUTTON_START_PROFILE_ID, centerX - 100, centerY - 25, "Profile for " + seconds + " seconds");
+        startProfile = new ProfileButton(BUTTON_START_PROFILE_ID, centerX - 100, centerY - 25, I18n.format("gui.laggoggles.text.profile.start", seconds));
         downloadButton = new DownloadButton(this, BUTTON_DOWNLOAD, centerX + 80, centerY - 25);
         optionsButton = new OptionsButton(BUTTON_OPTIONS, centerX - 100, centerY + 75);
-        GuiButton showToggle  = new GuiButton(BUTTON_SHOW_TOGGLE, centerX - 100, centerY +  5, LagOverlayGui.isShowing() ? "Hide latest scan results" : "Show latest scan results");
-        GuiButton analyzeResults  = new GuiButton(BUTTON_ANALYZE_RESULTS, centerX - 100, centerY +  30, "Analyze results");
+        GuiButton showToggle  = new GuiButton(BUTTON_SHOW_TOGGLE, centerX - 100, centerY +  5, LagOverlayGui.isShowing() ? I18n.format("gui.laggoggles.text.profile.hide") : I18n.format("gui.laggoggles.text.profile.show"));
+        GuiButton analyzeResults  = new GuiButton(BUTTON_ANALYZE_RESULTS, centerX - 100, centerY +  30, I18n.format("gui.laggoggles.text.profile.analyze"));
 
 
         showToggle.enabled = profileLoaded;
@@ -99,8 +101,9 @@ public class GuiProfile extends GuiScreen {
         this.buttonList.add(new DonateButton(BUTTON_DONATE, centerX + 10, centerY + 75));
         this.buttonList.add(optionsButton);
         GuiLabel scrollHint = new GuiLabel(fontRendererObj, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
-        scrollHint.addLine("Scroll while hovering over the button");
-        scrollHint.addLine("to change time time!");
+        for (val line: I18n.format("gui.laggoggles.text.profile.scrollhint", '\n').split("\n")) {
+            scrollHint.addLine(line);
+        }
         labelList.add(scrollHint);
         this.buttonList.add(downloadButton);
         initialized = true;
@@ -139,12 +142,12 @@ public class GuiProfile extends GuiScreen {
             startProfile.enabled = false;
             new Thread(buttonUpdateTask).start();
         }else if(getSecondsLeftForProfiler() >= 0){
-            startProfile.displayString = PROFILING_PLAYER + " > " + getSecondsLeftForProfiler() + " seconds.";
+            startProfile.displayString = I18n.format("gui.laggoggles.text.profile.running", PROFILING_PLAYER, getSecondsLeftForProfiler());
             startProfile.enabled = false;
             new Thread(buttonUpdateTask).start();
         }else{
             startProfile.enabled = true;
-            startProfile.displayString = "Profile for " + seconds + " seconds";
+            startProfile.displayString = I18n.format("gui.laggoggles.text.profile.start", seconds);
         }
         downloadButton.enabled = ServerDataPacketHandler.PERMISSION.ordinal() >= Perms.Permission.GET.ordinal();
     }
@@ -177,9 +180,9 @@ public class GuiProfile extends GuiScreen {
                 boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
                 seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
                 if(triedMore){
-                    startProfile.displayString = "Limited to " + seconds + " seconds.";
+                    startProfile.displayString = I18n.format("gui.laggoggles.text.profile.limited", seconds);
                 }else {
-                    startProfile.displayString = "Profile for " + seconds + " seconds";
+                    startProfile.displayString = I18n.format("gui.laggoggles.text.profile.start", seconds);
                 }
             }
         }
@@ -190,7 +193,7 @@ public class GuiProfile extends GuiScreen {
         CPacketRequestScan scan = new CPacketRequestScan();
         scan.length = seconds;
         startProfile.enabled = false;
-        startProfile.displayString = "Sending command...";
+        startProfile.displayString = I18n.format("gui.laggoggles.text.profile.sending");
         ClientProxy.NETWORK_WRAPPER.sendToServer(scan);
     }
 

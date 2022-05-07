@@ -4,6 +4,7 @@ import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Mouse;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public abstract class SplitButton extends GuiButton{
 
     public SplitButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText) {
         super(buttonId, x, y, widthIn, heightIn, buttonText);
-        clientButton = new GuiButton(id,x + width/2 + 5,y,width/2 - 5, height, "FPS");
-        serverButton = new GuiButton(id,x,y,width/2 - 5, height, "World");
+        clientButton = new GuiButton(id,x + width/2 + 5,y,width/2 - 5, height, I18n.format("gui.laggoggles.button.profile.fps.name"));
+        serverButton = new GuiButton(id,x,y,width/2 - 5, height, I18n.format("gui.laggoggles.button.profile.world.name"));
     }
 
 

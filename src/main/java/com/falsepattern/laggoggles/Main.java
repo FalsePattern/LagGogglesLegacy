@@ -15,8 +15,7 @@ import org.apache.logging.log4j.Logger;
      name = Tags.MODNAME,
      version = Tags.VERSION,
      acceptedMinecraftVersions = "[1.7.10]",
-     acceptableRemoteVersions = "*",
-     guiFactory = Tags.GROUPNAME + ".client.gui.GuiInGameConfigFactory")
+     acceptableRemoteVersions = "*")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
     public static Logger LOGGER;

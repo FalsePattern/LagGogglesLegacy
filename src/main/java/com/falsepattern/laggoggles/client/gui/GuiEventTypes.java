@@ -9,10 +9,13 @@ import com.falsepattern.laggoggles.profiler.TimingManager;
 import com.falsepattern.laggoggles.util.Calculations;
 import com.falsepattern.laggoggles.util.Graphical;
 import com.falsepattern.laggoggles.util.Perms;
+import com.falsepattern.lib.text.FormattedText;
 import cpw.mods.fml.client.GuiScrollingList;
+import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
 
 import java.util.Collections;
 import java.util.TreeSet;
@@ -83,8 +86,10 @@ public class GuiEventTypes extends GuiScrollingList {
     }
 
     public void displayCantSeeResults(int slotTop){
-        drawString("You can't see these results because the", left + 10, slotTop, 0x4C4C4C);
-        drawString("server has disabled it in their config.", left + 10, slotTop + 12, 0x4C4C4C);
+        val lines = I18n.format("gui.laggoggles.text.cantseeresults", '\n').split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            drawString(lines[i], left + 10, slotTop + i * 12, 0x4C4C4C);
+        }
     }
 
     @Override
@@ -98,14 +103,14 @@ public class GuiEventTypes extends GuiScrollingList {
         }
         GuiScanResultsWorld.LagSource lagSource = DATA.descendingSet().toArray(new GuiScanResultsWorld.LagSource[0])[slot];
         int threadColor = 0x00FF00;
-        String threadType = "(Asynchronous)";
+        String threadType = "(" + I18n.format("gui.laggoggles.text.threadtype.async") + ")";
         switch (TimingManager.EventTimings.ThreadType.values()[lagSource.data.<Integer>getValue(ObjectData.Entry.EVENT_BUS_THREAD_TYPE)]){
             case CLIENT:
-                threadType = "(Gui thread)";
+                threadType = "(" + I18n.format("gui.laggoggles.text.threadtype.gui") + ")";
                 threadColor = 0xFF0000;
                 break;
             case SERVER:
-                threadType = "(Server thread)";
+                threadType = "(" + I18n.format("gui.laggoggles.text.threadtype.server") + ")";
                 threadColor = 0xFF0000;
                 break;
         }

@@ -35,14 +35,14 @@ public class DownloadButton extends GuiButton{
         drawTexturedModelRectFromIcon(xPosition + 3, yPosition + 3, icon, 14, 14);
         if (this.mousePressed(mc, mouseX, mouseY)) {
             ArrayList<String> hover = new ArrayList<>();
-            hover.add(I18n.format("gui.laggoggles.button.download.hover"));
+            hover.add(I18n.format("gui.laggoggles.button.download.hover", '\n'));
             if(PERMISSION != Perms.Permission.FULL) {
                 hover.add("");
-                hover.add(I18n.format("gui.laggoggles.button.download.hover.notop"));
+                hover.add(I18n.format("gui.laggoggles.button.download.hover.notop", '\n'));
 
                 if(getSecondsLeftForMessage() >= 0){
                     hover.add("");
-                    hover.add(EnumChatFormatting.GRAY + I18n.format("gui.laggoggles.button.download.hover.cooldown"));
+                    hover.add(EnumChatFormatting.GRAY + I18n.format("gui.laggoggles.button.download.hover.cooldown", '\n'));
                 }
             }
             FormattedText.parse(String.join("\n", hover)).drawWithShadow(mc.fontRenderer, mouseX, mouseY);

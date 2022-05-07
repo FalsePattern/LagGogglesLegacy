@@ -31,6 +31,7 @@ import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -169,7 +170,7 @@ public class GuiSingleEntities extends GuiScrollingList {
                 className = source.data.getValue(ObjectData.Entry.BLOCK_CLASS_NAME);
                 break;
             default:
-                name = "Error! Please submit an issue at github";
+                name = I18n.format("gui.laggoggles.text.error");
                 className = source.data.type.toString();
         }
 
