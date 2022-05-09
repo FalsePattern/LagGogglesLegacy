@@ -4,7 +4,7 @@
   "package": "com.falsepattern.laggoggles.mixin.mixins",
   "plugin": "com.falsepattern.laggoggles.mixin.plugin.MixinPlugin",
   "refmap": "mixins.laggoggles.refmap.json",
-  "target": "@env(DEFAULT)",
+  "target": "@env(PREINIT)",
   "compatibilityLevel": "JAVA_8"
 }
 
