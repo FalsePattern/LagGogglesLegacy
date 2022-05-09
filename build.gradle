@@ -1,4 +1,4 @@
-//version: 1641429628falsepattern16
+//version: 1641429628falsepattern17
 /*
 DO NOT CHANGE THIS FILE!
 
@@ -95,6 +95,7 @@ checkPropertyExists("repositoryName")
 checkPropertyExists("mavenGroupId")
 checkPropertyExists("mavenArtifactId")
 checkPropertyExists("hasMixinDeps")
+checkPropertyExists("mixinPhase")
 
 
 String javaSourceDir = "src/main/java/"
@@ -263,13 +264,16 @@ def mixinSrg = "${tasks.reobf.temporaryDir}" + File.separator + "mixins.srg"
 
 task generateAssets {
     if(usesMixins.toBoolean()) {
+        if (mixinPhase != "DEFAULT" && mixinPhase != "PREINIT") {
+            throw new GradleException("The mixinPhase property must be either DEFAULT or PREINIT!")
+        }
         getFile("/src/main/resources/mixins." + modId + ".json").text = """{
   "required": true,
   "minVersion": "0.7.11",
   "package": "${modGroup}.${mixinsPackage}",
   "plugin": "${modGroup}.${mixinPlugin}",
   "refmap": "${mixingConfigRefMap}",
-  "target": "@env(DEFAULT)",
+  "target": "@env(${mixinPhase})",
   "compatibilityLevel": "JAVA_8"
 }
 
