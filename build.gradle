@@ -1,4 +1,4 @@
-//version: 1641429628falsepattern17
+//version: 1641429628falsepattern18
 /*
 DO NOT CHANGE THIS FILE!
 
@@ -95,7 +95,7 @@ checkPropertyExists("repositoryName")
 checkPropertyExists("mavenGroupId")
 checkPropertyExists("mavenArtifactId")
 checkPropertyExists("hasMixinDeps")
-checkPropertyExists("mixinPhase")
+checkPropertyExists("mixinPreinitConfig")
 
 
 String javaSourceDir = "src/main/java/"
@@ -264,16 +264,13 @@ def mixinSrg = "${tasks.reobf.temporaryDir}" + File.separator + "mixins.srg"
 
 task generateAssets {
     if(usesMixins.toBoolean()) {
-        if (mixinPhase != "DEFAULT" && mixinPhase != "PREINIT") {
-            throw new GradleException("The mixinPhase property must be either DEFAULT or PREINIT!")
-        }
         getFile("/src/main/resources/mixins." + modId + ".json").text = """{
   "required": true,
   "minVersion": "0.7.11",
   "package": "${modGroup}.${mixinsPackage}",
   "plugin": "${modGroup}.${mixinPlugin}",
   "refmap": "${mixingConfigRefMap}",
-  "target": "@env(${mixinPhase})",
+  "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8"
 }
 
@@ -445,7 +442,7 @@ def getManifestAttributes() {
     if(usesMixins.toBoolean()) {
         manifestAttributes += [
                 "TweakClass" : "org.spongepowered.asm.launch.MixinTweaker",
-                "MixinConfigs" : "mixins." + modId + ".json",
+                "MixinConfigs" : "mixins." + modId + ".json" + (mixinPreinitConfig ? "," + mixinPreinitConfig : ""),
                 "ForceLoadAsMod" : containsMixinsAndOrCoreModOnly.toBoolean() == false
         ]
     }

@@ -16,7 +16,7 @@ public enum Mixin implements IMixin {
         //region common
             MixinASMEventHandlerMixin(Side.COMMON, always(), "vanilla.MixinASMEventHandler"),
             MixinEntity(Side.COMMON, always(), "vanilla.MixinEntity"),
-            MixinEventBus(Side.COMMON, always(), "vanilla.MixinEventBus"),
+            //Loaded in preinit MixinEventBus(Side.COMMON, always(), "vanilla.MixinEventBus"),
             MixinWorld(Side.COMMON, always(), "vanilla.MixinWorld"),
             MixinWorldServer(Side.COMMON, always(), "vanilla.MixinWorldServer"),
         //endregion common

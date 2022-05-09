@@ -2,9 +2,11 @@
   "required": true,
   "minVersion": "0.7.11",
   "package": "com.falsepattern.laggoggles.mixin.mixins",
-  "plugin": "com.falsepattern.laggoggles.mixin.plugin.MixinPlugin",
   "refmap": "mixins.laggoggles.refmap.json",
-  "target": "@env(DEFAULT)",
-  "compatibilityLevel": "JAVA_8"
+  "target": "@env(PREINIT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "common.vanilla.MixinEventBus"
+  ]
 }
 
