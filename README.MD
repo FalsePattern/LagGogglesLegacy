@@ -4,20 +4,18 @@
 
 A backport of [TerminatorNL](https://github.com/TerminatorNL)'s LagGoggles to 1.7.10, licensed under GPLv3!
 
+Original description:
+
 Intuitive lag hunting!
 
 LagGoggles is a profiler where you can see timings in the world, visually. It comes with a custom GUI using a
-configurable keybind. [FalsePatternLib](https://www.curseforge.com/minecraft/mc-mods/falsepatternlib) and either [SpongeMixins](https://www.curseforge.com/minecraft/mc-mods/spongemixins) or [Grimoire](https://www.curseforge.com/minecraft/mc-mods/grimoire-api)!
+configurable keybind.
 
 You can use LagGoggles as a player too! This is my attempt to create an understanding of what causes lag on a server to regular players.
 
 I noticed some common misconceptions like having machines spread out over different chunks causes less lag than putting it in one chunk.
 
 With LagGoggles, you can look around and see that alot of small things like pipes or cables cause a tiny bit of lag most of the time, often resulting in more lag than a machine right next to the source would.
-
-LagGoggles can also profile clientside FPS as of version 4.0!
-
-### Download: Check the github releases. CurseForge release soon.
 
 ## Screenshots
 
@@ -67,6 +65,5 @@ Entities, blocks and event-subscribers are timed using System.nanotime() before 
 * Learn your players to build lag-free bases.
 
 ## Dependencies
-[FalsePatternLib](https://www.curseforge.com/minecraft/mc-mods/falsepatternlib)
-
-[SpongeMixins](https://www.curseforge.com/minecraft/mc-mods/spongemixins) or [Grimoire](https://www.curseforge.com/minecraft/mc-mods/grimoire-api)
+- [FalsePatternLib](https://github.com/FalsePattern/FalsePatternLib)
+- [SpongeMixins](https://github.com/TimeConqueror/SpongeMixins)
