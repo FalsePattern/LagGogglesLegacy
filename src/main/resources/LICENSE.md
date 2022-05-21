@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------------------------------
 The original code was written by TerminatorNL, made for 1.12.2, which was licensed under the GPLv3 license:
 
-Lag Goggles: Legacy
+LagGoggles
 
 Copyright (c) 2020 TerminatorNL
 
