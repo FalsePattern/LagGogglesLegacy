@@ -4,7 +4,11 @@
 
 A backport of [TerminatorNL](https://github.com/TerminatorNL)'s LagGoggles to 1.7.10, licensed under GPLv3!
 
-Original description:
+## Dependencies
+- [FalsePatternLib](https://github.com/FalsePattern/FalsePatternLib)
+- [SpongeMixins](https://github.com/TimeConqueror/SpongeMixins)
+
+## Original description:
 
 Intuitive lag hunting!
 
@@ -63,7 +67,3 @@ Entities, blocks and event-subscribers are timed using System.nanotime() before 
 ## Benefits
 * Visualisation of various sources of lag
 * Learn your players to build lag-free bases.
-
-## Dependencies
-- [FalsePatternLib](https://github.com/FalsePattern/FalsePatternLib)
-- [SpongeMixins](https://github.com/TimeConqueror/SpongeMixins)
