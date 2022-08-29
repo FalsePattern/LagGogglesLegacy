@@ -33,7 +33,10 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postinit(FMLPostInitializationEvent e){
         super.postinit(e);
-        ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Tags.MODID, () -> Minecraft.getMinecraft().displayGuiScreen(new GuiProfile())));
+        ClientRegistry.registerKeyBinding(new KeyHandler("Profile GUI", Keyboard.KEY_INSERT, Tags.MODID, () -> {
+            NETWORK_WRAPPER.sendToServer(new CPacketRequestServerData());
+            Minecraft.getMinecraft().displayGuiScreen(new GuiProfile());
+        }));
 
         FMLCommonHandler.instance().bus().register(new LoginHandler());
     }
