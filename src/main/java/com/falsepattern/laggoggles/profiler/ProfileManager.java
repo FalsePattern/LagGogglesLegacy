@@ -185,7 +185,7 @@ public class ProfileManager {
                             Main.LOGGER.info("Blocks in locations: " + ignoredBlocks);
                         }
                     } catch (Throwable e) {
-                        Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact Terminator_NL and submit the following error in an issue at github!");
+                        Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact FalsePattern and submit the following error in an issue at github!");
                         e.printStackTrace();
                     }
                 }
@@ -207,7 +207,7 @@ public class ProfileManager {
             FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
             return LAST_PROFILE_RESULT.get();
         } catch (Throwable e) {
-            Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact Terminator_NL and submit the following error in an issue at github!");
+            Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact FalsePattern and submit the following error in an issue at github!");
             e.printStackTrace();
             return null;
         }
