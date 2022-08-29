@@ -59,6 +59,7 @@ public class ProfileManager {
     private static final Object LOCK = new Object();
     private static final FPSCounter FPS_COUNTER = new FPSCounter();
 
+    @SuppressWarnings("unchecked")
     public static ProfileResult runProfiler(int seconds, ScanType type, ICommandSender issuer) throws IllegalStateException{
         try {
             if(PROFILE_ENABLED.get()){
@@ -68,12 +69,9 @@ public class ProfileManager {
             /* Send status to users */
             SPacketProfileStatus status = new SPacketProfileStatus(true, seconds, issuer.getCommandSenderName());
 
-            new RunInServerThread(new Runnable() {
-                @Override
-                public void run() {
-                    for(EntityPlayerMP user : Perms.getLagGogglesUsers()) {
-                        CommonProxy.sendTo(status, user);
-                    }
+            new RunInServerThread(() -> {
+                for(EntityPlayerMP user : Perms.getLagGogglesUsers()) {
+                    CommonProxy.sendTo(status, user);
                 }
             });
             FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
@@ -86,108 +84,110 @@ public class ProfileManager {
                 FPS_COUNTER.start();
             }
             PROFILE_ENABLED.set(true);
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
             PROFILE_ENABLED.set(false);
             long frames = FPS_COUNTER.stop();
 
-            Runnable task = new Runnable() {
-                @Override
-                public void run() {
-                    try{
-                        ArrayList<Entity> ignoredEntities = new ArrayList<>();
-                        ArrayList<TileEntity> ignoredTileEntities = new ArrayList<>();
-                        ArrayList<BlockPos> ignoredBlocks = new ArrayList<>();
+            Runnable task = () -> {
+                try{
+                    ArrayList<Entity> ignoredEntities = new ArrayList<>();
+                    ArrayList<TileEntity> ignoredTileEntities = new ArrayList<>();
+                    ArrayList<BlockPos> ignoredBlocks = new ArrayList<>();
 
-                        Main.LOGGER.info("Processing results synchronously...");
-                        ProfileResult result = new ProfileResult(start, System.nanoTime(), TickCounter.ticks.get(), Side.getSide(), type);
-                        if(Side.getSide().isClient()) {
-                            result.setFrames(frames);
+                    Main.LOGGER.info("Processing results synchronously...");
+                    ProfileResult result = new ProfileResult(start, System.nanoTime(), TickCounter.ticks.get(), Side.getSide(), type);
+                    if(Side.getSide().isClient()) {
+                        result.setFrames(frames);
+                    }
+
+                    for(Map.Entry<Integer, TimingManager.WorldData> entry : timingManager.getTimings().entrySet()){
+                        int worldID = entry.getKey();
+                        WorldServer world = DimensionManager.getWorld(worldID);
+                        if(world == null){
+                            continue;
                         }
-
-                        for(Map.Entry<Integer, TimingManager.WorldData> entry : timingManager.getTimings().entrySet()){
-                            int worldID = entry.getKey();
-                            WorldServer world = DimensionManager.getWorld(worldID);
-                            if(world == null){
+                        for(Map.Entry<UUID, Long> entityTimes : entry.getValue().getEntityTimes().entrySet()){
+                            Entity e = ((List<Entity>)world.loadedEntityList)
+                                    .stream()
+                                    .filter((ent) -> ent.getPersistentID()
+                                                        .equals(entityTimes.getKey()))
+                                    .findFirst()
+                                    .orElse(null);
+                            if(e == null){
                                 continue;
                             }
-                            for(Map.Entry<UUID, Long> entityTimes : entry.getValue().getEntityTimes().entrySet()){
-                                Entity e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getPersistentID().equals(entityTimes.getKey())).findFirst().orElse(null);
-                                if(e == null){
-                                    continue;
-                                }
+                            try {
+                                result.addData(new ObjectData(
+                                        worldID,
+                                        e.getCommandSenderName(),
+                                        Graphical.formatClassName(e.getClass().toString()),
+                                        e.getPersistentID(),
+                                        entityTimes.getValue(),
+                                        ObjectData.Type.ENTITY)
+                                );
+                            }catch (Throwable t){
+                                ignoredEntities.add(e);
+                            }
+                        }
+                        for(Map.Entry<BlockPos, Long> tileEntityTimes : entry.getValue().getBlockTimes().entrySet()){
+                            val pos = tileEntityTimes.getKey();
+                            val cPos = new ChunkPos(pos);
+                            if(world.isRemote ? world.getChunkProvider().provideChunk(cPos.x, cPos.z) == null : !world.getChunkProvider().chunkExists(cPos.x, cPos.z)) {
+                                continue;
+                            }
+                            TileEntity e = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
+                            if(e != null) {
                                 try {
+                                    String name = e.getClass().getSimpleName();
                                     result.addData(new ObjectData(
                                             worldID,
-                                            e.getCommandSenderName(),
+                                            name,
                                             Graphical.formatClassName(e.getClass().toString()),
-                                            e.getPersistentID(),
-                                            entityTimes.getValue(),
-                                            ObjectData.Type.ENTITY)
+                                            new BlockPos(e.xCoord, e.yCoord, e.zCoord),
+                                            tileEntityTimes.getValue(),
+                                            ObjectData.Type.TILE_ENTITY)
                                     );
                                 }catch (Throwable t){
-                                    ignoredEntities.add(e);
+                                    ignoredTileEntities.add(e);
                                 }
-                            }
-                            for(Map.Entry<BlockPos, Long> tileEntityTimes : entry.getValue().getBlockTimes().entrySet()){
-                                val pos = tileEntityTimes.getKey();
-                                val cPos = new ChunkPos(pos);
-                                if(world.isRemote ? world.getChunkProvider().provideChunk(cPos.x, cPos.z) == null : !world.getChunkProvider().chunkExists(cPos.x, cPos.z)) {
-                                    continue;
-                                }
-                                TileEntity e = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
-                                if(e != null) {
-                                    try {
-                                        String name = e.getClass().getSimpleName();
-                                        result.addData(new ObjectData(
-                                                worldID,
-                                                name,
-                                                Graphical.formatClassName(e.getClass().toString()),
-                                                new BlockPos(e.xCoord, e.yCoord, e.zCoord),
-                                                tileEntityTimes.getValue(),
-                                                ObjectData.Type.TILE_ENTITY)
-                                        );
-                                    }catch (Throwable t){
-                                        ignoredTileEntities.add(e);
-                                    }
-                                }else{
-                                    /* The block is not a tile entity, get the actual block. */
-                                    try {
-                                        val block = world.getBlock(pos.getX(), pos.getY(), pos.getZ());
-                                        String name = block.getLocalizedName();
-                                        result.addData(new ObjectData(
-                                                worldID,
-                                                name,
-                                                Graphical.formatClassName(block.getClass().toString()),
-                                                tileEntityTimes.getKey(),
-                                                tileEntityTimes.getValue(),
-                                                ObjectData.Type.BLOCK));
-                                    }catch (Throwable t){
-                                        ignoredBlocks.add(tileEntityTimes.getKey());
-                                    }
+                            }else{
+                                /* The block is not a tile entity, get the actual block. */
+                                try {
+                                    val block = world.getBlock(pos.getX(), pos.getY(), pos.getZ());
+                                    String name = block.getLocalizedName();
+                                    result.addData(new ObjectData(
+                                            worldID,
+                                            name,
+                                            Graphical.formatClassName(block.getClass().toString()),
+                                            tileEntityTimes.getKey(),
+                                            tileEntityTimes.getValue(),
+                                            ObjectData.Type.BLOCK));
+                                }catch (Throwable t){
+                                    ignoredBlocks.add(tileEntityTimes.getKey());
                                 }
                             }
                         }
-                        for(Map.Entry<TimingManager.EventTimings, AtomicLong> entry : timingManager.getEventTimings().entrySet()){
-                            result.addData(new ObjectData(entry.getKey(), entry.getValue().get()));
-                        }
-                        if(result.getSide().isClient()) {
-                            insertGuiData(result, timingManager);
-                        }
-                        result.lock();
-                        LAST_PROFILE_RESULT.set(result);
-                        synchronized (LOCK){
-                            LOCK.notifyAll();
-                        }
-                        if(ignoredBlocks.size() + ignoredEntities.size() + ignoredTileEntities.size() > 0) {
-                            Main.LOGGER.info("Ignored some tracked elements:");
-                            Main.LOGGER.info("Entities: " + ignoredEntities);
-                            Main.LOGGER.info("Tile entities: " + ignoredTileEntities);
-                            Main.LOGGER.info("Blocks in locations: " + ignoredBlocks);
-                        }
-                    } catch (Throwable e) {
-                        Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact FalsePattern and submit the following error in an issue at github!");
-                        e.printStackTrace();
                     }
+                    for(Map.Entry<TimingManager.EventTimings, AtomicLong> entry : timingManager.getEventTimings().entrySet()){
+                        result.addData(new ObjectData(entry.getKey(), entry.getValue().get()));
+                    }
+                    if(result.getSide().isClient()) {
+                        insertGuiData(result, timingManager);
+                    }
+                    result.lock();
+                    LAST_PROFILE_RESULT.set(result);
+                    synchronized (LOCK){
+                        LOCK.notifyAll();
+                    }
+                    if(ignoredBlocks.size() + ignoredEntities.size() + ignoredTileEntities.size() > 0) {
+                        Main.LOGGER.info("Ignored some tracked elements:");
+                        Main.LOGGER.info("Entities: " + ignoredEntities);
+                        Main.LOGGER.info("Tile entities: " + ignoredTileEntities);
+                        Main.LOGGER.info("Blocks in locations: " + ignoredBlocks);
+                    }
+                } catch (Throwable e) {
+                    Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact FalsePattern and submit the following error in an issue at github!");
+                    e.printStackTrace();
                 }
             };
             Side side = Side.getSide();
@@ -213,6 +213,7 @@ public class ProfileManager {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void insertGuiData(ProfileResult result, TimingManager timings) {
         TreeMap<UUID, Long> entityTimes = timings.getGuiEntityTimings();
         for (Entity e : (List<Entity>)Minecraft.getMinecraft().theWorld.loadedEntityList) {

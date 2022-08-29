@@ -108,7 +108,7 @@ public class Perms {
                 WorldServer world = DimensionManager.getWorld(data.getValue(ObjectData.Entry.WORLD_ID));
                 Entity e;
                 val uuid = data.getValue(ObjectData.Entry.ENTITY_UUID);
-                if(world != null && (e = ((List<Entity>)world.getLoadedEntityList()).stream().filter((ent) -> ent.getPersistentID().equals(uuid))
+                if(world != null && (e = ((List<Entity>)world.loadedEntityList).stream().filter((ent) -> ent.getPersistentID().equals(uuid))
                                                                                     .findFirst()
                                                                                     .orElse(null)) != null){
                     return checkRange(player, e.posX, e.posY, e.posZ);

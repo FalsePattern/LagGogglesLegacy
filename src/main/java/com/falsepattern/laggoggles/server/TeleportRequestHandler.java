@@ -43,6 +43,7 @@ import java.util.List;
 
 public class TeleportRequestHandler implements IMessageHandler<CPacketRequestEntityTeleport, IMessage> {
 
+    @SuppressWarnings("unchecked")
     @Override
     public IMessage onMessage(CPacketRequestEntityTeleport message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
@@ -52,7 +53,7 @@ public class TeleportRequestHandler implements IMessageHandler<CPacketRequestEnt
         }
         new RunInServerThread(() -> {
             Entity e = Arrays.stream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServers)
-                             .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
+                             .flatMap((world) -> ((List<Entity>)world.loadedEntityList).stream())
                              .filter((entity) -> entity.getPersistentID().equals(message.uuid))
                              .findFirst()
                              .orElse(null);
