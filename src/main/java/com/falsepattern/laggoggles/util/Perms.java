@@ -7,16 +7,13 @@ import com.falsepattern.laggoggles.server.ServerConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
 import lombok.val;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 public class Perms {
 
@@ -30,34 +27,31 @@ public class Perms {
         FULL
     }
 
-    public static Permission getPermission(EntityPlayer p){
-        if(/*TODO FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0 || */!FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer()) {
+    public static Permission getPermission(EntityPlayerMP p){
+        val profile = p.getGameProfile();
+        val manager = MinecraftServer.getServer().getConfigurationManager();
+        if (manager.func_152596_g(profile)) {
             return Permission.FULL;
-        }else{
+        } else {
             return ServerConfig.NON_OP_PERMISSION_LEVEL;
         }
     }
 
-    public static boolean hasPermission(EntityPlayer player, Permission permission){
+    public static boolean hasPermission(EntityPlayerMP player, Permission permission){
         return getPermission(player).ordinal() >= permission.ordinal();
     }
 
+    @SuppressWarnings("unchecked")
     public static ArrayList<EntityPlayerMP> getLagGogglesUsers(){
         ArrayList<EntityPlayerMP> list = new ArrayList<>();
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         if(server == null){
             return list;
         }
-        for(UUID uuid : RequestDataHandler.playersWithLagGoggles){
-            Entity entity = Arrays.stream(server.worldServers)
-                                  .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
-                                  .filter((ent) -> ent.getPersistentID().equals(uuid))
-                                  .findFirst()
-                                  .orElse(null);
-            if(entity instanceof EntityPlayerMP){
-                list.add((EntityPlayerMP) entity);
-            }
-        }
+        ((List<EntityPlayerMP>) MinecraftServer.getServer().getConfigurationManager().playerEntityList)
+                .stream()
+                .filter((ent) -> RequestDataHandler.playersWithLagGoggles.contains(ent.getPersistentID()))
+                .forEach(list::add);
         return list;
     }
 
@@ -71,13 +65,14 @@ public class Perms {
         }
         ProfileResult trimmedResult = result.copyStatsOnly();
         for(ObjectData data : result.getData()){
-            if(isInRange(data, player) == true){
+            if(isInRange(data, player)){
                 trimmedResult.addData(data);
             }
         }
         return trimmedResult;
     }
 
+    @SuppressWarnings("unchecked")
     public static boolean isInRange(ObjectData data, EntityPlayerMP player){
         if(data.type == ObjectData.Type.EVENT_BUS_LISTENER){
             return ServerConfig.ALLOW_NON_OPS_TO_SEE_EVENT_SUBSCRIBERS;
@@ -122,11 +117,8 @@ public class Perms {
             return true;
         }
 
-        /* If it's underground, we restrict the results so you can't abuse it to find spawners, chests, minecarts.. etc. */
+        /* If it's underground, we restrict the results, so you can't abuse it to find spawners, chests, minecarts.. etc. */
         double yD = y - player.posY;
-        if(yD*yD > MAX_RANGE_FOR_PLAYERS_VERTICAL_SQ){
-            return false;
-        }
-        return true;
+        return !(yD * yD > MAX_RANGE_FOR_PLAYERS_VERTICAL_SQ);
     }
 }

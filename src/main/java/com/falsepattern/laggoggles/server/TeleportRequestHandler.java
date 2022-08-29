@@ -23,24 +23,21 @@ public class TeleportRequestHandler implements IMessageHandler<CPacketRequestEnt
     @Override
     public IMessage onMessage(CPacketRequestEntityTeleport message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-        if(Perms.hasPermission(player, Perms.Permission.FULL) == false){
+        if(!Perms.hasPermission(player, Perms.Permission.FULL)){
             Main.LOGGER.info(player.getDisplayName() + " tried to teleport, but was denied to do so!");
             return new SPacketMessage("No permission");
         }
-        new RunInServerThread(new Runnable() {
-            @Override
-            public void run() {
-                Entity e = Arrays.stream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServers)
-                                 .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
-                                 .filter((entity) -> entity.getPersistentID().equals(message.uuid))
-                                 .findFirst()
-                                 .orElse(null);
-                if(e == null){
-                    FormattedText.parse(EnumChatFormatting.RED + "Woops! This entity no longer exists!").addChatMessage(player);
-                    return;
-                }
-                Teleport.teleportPlayer(player, e.dimension, e.posX, e.posY, e.posZ);
+        new RunInServerThread(() -> {
+            Entity e = Arrays.stream(FMLCommonHandler.instance().getMinecraftServerInstance().worldServers)
+                             .flatMap((world) -> ((List<Entity>)world.getLoadedEntityList()).stream())
+                             .filter((entity) -> entity.getPersistentID().equals(message.uuid))
+                             .findFirst()
+                             .orElse(null);
+            if(e == null){
+                FormattedText.parse(EnumChatFormatting.RED + "Woops! This entity no longer exists!").addChatMessage(player);
+                return;
             }
+            Teleport.teleportPlayer(player, e.dimension, e.posX, e.posY, e.posZ);
         });
         return null;
     }
