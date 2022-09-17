@@ -1,6 +1,6 @@
 {
   "required": true,
-  "minVersion": "0.7.11",
+  "minVersion": "0.8.3",
   "package": "com.falsepattern.laggoggles.mixin.mixins",
   "refmap": "mixins.laggoggles.refmap.json",
   "target": "@env(PREINIT)",

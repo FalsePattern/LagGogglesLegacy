@@ -26,8 +26,13 @@ package com.falsepattern.laggoggles.server;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.config.Config;
+import com.falsepattern.lib.config.ConfigurationManager;
+
 @Config(modid = Tags.MODID, category = "server")
 public class ServerConfig {
+    {
+        ConfigurationManager.selfInit();
+    }
 
     @Config.Comment("What's the permission level available to non-operators (Normal players)?\n" +
                     "Please note that this ONLY works on dedicated servers. If you're playing singleplayer or LAN, the FULL permission is used.\n" +

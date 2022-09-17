@@ -26,8 +26,13 @@ package com.falsepattern.laggoggles.client;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.util.ColorBlindMode;
 import com.falsepattern.lib.config.Config;
+import com.falsepattern.lib.config.ConfigurationManager;
+
 @Config(modid = Tags.MODID, category = "client")
 public class ClientConfig {
+    {
+        ConfigurationManager.selfInit();
+    }
 
     @Config.Comment("Define the number of microseconds at which an object is marked with a deep red colour for WORLD lag.")
     @Config.LangKey("config.laggoggles.client.gradientworld")
