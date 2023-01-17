@@ -30,10 +30,6 @@ import com.falsepattern.lib.config.ConfigurationManager;
 
 @Config(modid = Tags.MODID, category = "client")
 public class ClientConfig {
-    {
-        ConfigurationManager.selfInit();
-    }
-
     @Config.Comment("Define the number of microseconds at which an object is marked with a deep red colour for WORLD lag.")
     @Config.LangKey("config.laggoggles.client.gradientworld")
     @Config.RangeInt(min = 0)
@@ -54,4 +50,8 @@ public class ClientConfig {
     @Config.Comment("If you're colorblind, change this to fit your needs.")
     @Config.LangKey("config.laggoggles.client.colors")
     public static ColorBlindMode COLORS = ColorBlindMode.GREEN_TO_RED;
+
+    static {
+        ConfigurationManager.selfInit();
+    }
 }
