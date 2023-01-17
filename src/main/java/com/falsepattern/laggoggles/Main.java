@@ -39,7 +39,7 @@ import org.apache.logging.log4j.Logger;
      version = Tags.VERSION,
      acceptedMinecraftVersions = "[1.7.10]",
      acceptableRemoteVersions = "*",
-     dependencies = "required-after:falsepatternlib@[0.10.5,)")
+     dependencies = "required-after:falsepatternlib@[0.10.14,)")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
     public static Logger LOGGER;
