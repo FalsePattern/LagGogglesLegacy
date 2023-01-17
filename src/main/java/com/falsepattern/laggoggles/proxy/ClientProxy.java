@@ -24,6 +24,7 @@
 package com.falsepattern.laggoggles.proxy;
 
 import com.falsepattern.laggoggles.Tags;
+import com.falsepattern.laggoggles.client.ClientConfig;
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.KeyHandler;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
@@ -42,6 +43,12 @@ import static com.falsepattern.laggoggles.client.ServerDataPacketHandler.RECEIVE
 import static com.falsepattern.laggoggles.profiler.ProfileManager.LAST_PROFILE_RESULT;
 
 public class ClientProxy extends CommonProxy {
+    @Override
+    public void preinit(FMLPreInitializationEvent e) {
+        ClientConfig.init();
+        super.preinit(e);
+    }
+
     @Override
     public void postinit(FMLPostInitializationEvent e){
         super.postinit(e);

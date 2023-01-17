@@ -30,9 +30,6 @@ import com.falsepattern.lib.config.ConfigurationManager;
 
 @Config(modid = Tags.MODID, category = "server")
 public class ServerConfig {
-    {
-        ConfigurationManager.selfInit();
-    }
 
     @Config.Comment("What's the permission level available to non-operators (Normal players)?\n" +
                     "Please note that this ONLY works on dedicated servers. If you're playing singleplayer or LAN, the FULL permission is used.\n" +
@@ -64,4 +61,13 @@ public class ServerConfig {
 
     @Config.Comment("How often can normal users request the latest scan result in seconds?")
     public static int NON_OPS_REQUEST_LAST_SCAN_DATA_TIMEOUT = 30;
+
+    static {
+        ConfigurationManager.selfInit();
+    }
+
+    //This is here to force the class to load
+    public static void init() {
+
+    }
 }

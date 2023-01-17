@@ -23,5 +23,14 @@
 
 package com.falsepattern.laggoggles.proxy;
 
+import com.falsepattern.laggoggles.server.ServerConfig;
+
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 public class ServerProxy extends CommonProxy {
+    @Override
+    public void preinit(FMLPreInitializationEvent e) {
+        ServerConfig.init();
+        super.preinit(e);
+    }
 }

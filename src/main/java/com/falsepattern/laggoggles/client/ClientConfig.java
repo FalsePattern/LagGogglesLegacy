@@ -54,4 +54,9 @@ public class ClientConfig {
     static {
         ConfigurationManager.selfInit();
     }
+
+    //This is here to force the class to load
+    public static void init() {
+
+    }
 }
