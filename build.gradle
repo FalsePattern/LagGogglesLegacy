@@ -1,4 +1,4 @@
-//version: 1656003793falsepattern60
+//version: 1656003793falsepattern61
 /*
 DO NOT CHANGE THIS FILE!
 
@@ -670,7 +670,6 @@ def getCredentials = {
 }
 
 //Publishing
-publish.dependsOn(build)
 publishing {
     publications {
         maven(MavenPublication) {
@@ -723,6 +722,12 @@ publishing {
         }
     }
 }
+
+tasks.withType(PublishToMavenRepository) { task ->
+    dependsOn("build")
+}
+
+publishToMavenLocal.dependsOn("build")
 
 if (project.changelog == "") {
     File changelogFile = new File(System.getenv("CHANGELOG_FILE") ?: "CHANGELOG.md")
