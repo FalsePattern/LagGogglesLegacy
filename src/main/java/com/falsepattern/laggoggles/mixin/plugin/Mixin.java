@@ -32,22 +32,31 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.always;
+import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.avoid;
+import static com.falsepattern.lib.mixin.IMixin.PredicateHelpers.require;
 
 @RequiredArgsConstructor
 public enum Mixin implements IMixin {
+    // @formatter:off
     //region vanilla
         //region common
             MixinASMEventHandlerMixin(Side.COMMON, always(), "vanilla.MixinASMEventHandler"),
             MixinEntity(Side.COMMON, always(), "vanilla.MixinEntity"),
             //Loaded in preinit MixinEventBus(Side.COMMON, always(), "vanilla.MixinEventBus"),
             MixinWorld(Side.COMMON, always(), "vanilla.MixinWorld"),
-            MixinWorldServer(Side.COMMON, always(), "vanilla.MixinWorldServer"),
+            MixinWorldServer(Side.COMMON, avoid(TargetedMod.DRAGONAPI), "vanilla.MixinWorldServer"),
         //endregion common
         //region client
             MixinRenderManager(Side.CLIENT, always(), "vanilla.MixinRenderManager"),
             MixinTileEntityRendererDispatcher(Side.CLIENT, always(), "vanilla.MixinTileEntityRendererDispatcher"),
         //endregion client
     //endregion vanilla
+    //region dragonapi
+        //region common
+            MixinBlockTickEvent(Side.COMMON, require(TargetedMod.DRAGONAPI), "dragonapi.MixinBlockTickEvent"),
+        //endregion common
+    //endregion dragonapi
+    // @formatter:on
     ;
 
     @Getter

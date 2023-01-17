@@ -29,8 +29,11 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.function.Predicate;
 
+import static com.falsepattern.lib.mixin.ITargetedMod.PredicateHelpers.*;
+
 @RequiredArgsConstructor
 public enum TargetedMod implements ITargetedMod {
+    DRAGONAPI("DragonAPI", false, startsWith("dragonapi"))
     ;
 
     @Getter
