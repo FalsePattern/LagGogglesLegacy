@@ -39,6 +39,7 @@ import org.apache.logging.log4j.Logger;
      version = Tags.VERSION,
      acceptedMinecraftVersions = "[1.7.10]",
      acceptableRemoteVersions = "*",
+     guiFactory = Tags.GROUPNAME + ".client.gui.ConfigGuiFactory",
      dependencies = "required-after:falsepatternlib@[0.10.14,)")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
@@ -51,7 +52,7 @@ public class Main {
     public static CommonProxy proxy;
 
     @EventHandler
-    public void preinit(FMLPreInitializationEvent e){
+    public void preinit(FMLPreInitializationEvent e) {
         LOGGER = e.getModLog();
         proxy.preinit(e);
         Main.LOGGER.info("Registered sided proxy for: " + (proxy instanceof ClientProxy ? "Client" : "Dedicated server"));
