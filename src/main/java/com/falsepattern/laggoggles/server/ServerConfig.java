@@ -38,29 +38,37 @@ public class ServerConfig {
                     "   'GET'   Allow getting the latest scan result, this will be stripped down to the player's surroundings\n" +
                     "   'START' Allow starting the profiler\n" +
                     "   'FULL'  All permissions are granted, teleporting to entities, blocks")
-    public static Perms.Permission NON_OP_PERMISSION_LEVEL = Perms.Permission.START;
+    @Config.DefaultEnum("START")
+    public static Perms.Permission NON_OP_PERMISSION_LEVEL;
 
     @Config.Comment("Allow normal users to see event subscribers?")
-    public static boolean ALLOW_NON_OPS_TO_SEE_EVENT_SUBSCRIBERS = false;
+    @Config.DefaultBoolean(false)
+    public static boolean ALLOW_NON_OPS_TO_SEE_EVENT_SUBSCRIBERS;
 
     @Config.Comment("If normal users can start the profiler, what is the maximum time in seconds?")
-    public static int NON_OPS_MAX_PROFILE_TIME = 20;
+    @Config.DefaultInt(20)
+    public static int NON_OPS_MAX_PROFILE_TIME;
 
     @Config.Comment("If normal users can start the profiler, what is the cool-down between requests in seconds?")
-    public static int NON_OPS_PROFILE_COOL_DOWN_SECONDS = 120;
+    @Config.DefaultInt(120)
+    public static int NON_OPS_PROFILE_COOL_DOWN_SECONDS;
 
     @Config.Comment("What is the maximum HORIZONTAL range in blocks normal users can get results for?")
-    public static float NON_OPS_MAX_HORIZONTAL_RANGE = 50;
+    @Config.DefaultDouble(50)
+    public static double NON_OPS_MAX_HORIZONTAL_RANGE;
 
     @Config.Comment("What is the maximum VERTICAL range in blocks normal users can get results for?")
-    public static float NON_OPS_MAX_VERTICAL_RANGE = 20;
+    @Config.DefaultDouble(20)
+    public static double NON_OPS_MAX_VERTICAL_RANGE;
 
     @Config.Comment("From where should we range-limit blocks vertically for normal users?\n" +
                     "This will override the MAX_VERTICAL_RANGE when the block is above this Y level")
-    public static int NON_OPS_WHITELIST_HEIGHT_ABOVE = 64;
+    @Config.DefaultInt(64)
+    public static int NON_OPS_WHITELIST_HEIGHT_ABOVE;
 
     @Config.Comment("How often can normal users request the latest scan result in seconds?")
-    public static int NON_OPS_REQUEST_LAST_SCAN_DATA_TIMEOUT = 30;
+    @Config.DefaultInt(30)
+    public static int NON_OPS_REQUEST_LAST_SCAN_DATA_TIMEOUT;
 
     static {
         ConfigurationManager.selfInit();
