@@ -17,7 +17,7 @@ dependencies {
     }
     annotationProcessor("org.projectlombok:lombok:1.18.24")
 
-    implementation("com.falsepattern:falsepatternlib-mc1.7.10:0.11.4:dev")
+    implementation("com.falsepattern:falsepatternlib-mc1.7.10:1.1.0:dev")
 
     compileOnly(deobfCurse("dragonapi-235591:3574508"))
 }
