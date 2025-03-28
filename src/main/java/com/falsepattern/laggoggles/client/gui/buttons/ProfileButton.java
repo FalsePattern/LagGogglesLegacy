@@ -32,6 +32,7 @@ import com.falsepattern.laggoggles.client.gui.QuickText;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.util.Perms;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;

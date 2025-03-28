@@ -24,6 +24,7 @@
 package com.falsepattern.laggoggles.client.gui;
 
 import lombok.RequiredArgsConstructor;
+
 import net.minecraft.util.IIcon;
 
 @RequiredArgsConstructor

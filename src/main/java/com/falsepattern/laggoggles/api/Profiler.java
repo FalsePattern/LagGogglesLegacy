@@ -26,6 +26,7 @@ package com.falsepattern.laggoggles.api;
 import com.falsepattern.laggoggles.profiler.ProfileManager;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.ScanType;
+
 import net.minecraft.command.ICommandSender;
 
 import javax.annotation.Nullable;

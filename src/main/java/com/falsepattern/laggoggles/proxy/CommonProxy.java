@@ -29,12 +29,26 @@ import com.falsepattern.laggoggles.client.ProfileStatusHandler;
 import com.falsepattern.laggoggles.client.ScanResultHandler;
 import com.falsepattern.laggoggles.client.ServerDataPacketHandler;
 import com.falsepattern.laggoggles.command.LagGogglesCommand;
-import com.falsepattern.laggoggles.packet.*;
+import com.falsepattern.laggoggles.packet.CPacketRequestEntityTeleport;
+import com.falsepattern.laggoggles.packet.CPacketRequestResult;
+import com.falsepattern.laggoggles.packet.CPacketRequestScan;
+import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
+import com.falsepattern.laggoggles.packet.CPacketRequestTileEntityTeleport;
+import com.falsepattern.laggoggles.packet.SPacketMessage;
+import com.falsepattern.laggoggles.packet.SPacketProfileStatus;
+import com.falsepattern.laggoggles.packet.SPacketScanResult;
+import com.falsepattern.laggoggles.packet.SPacketServerData;
 import com.falsepattern.laggoggles.profiler.ProfileResult;
 import com.falsepattern.laggoggles.profiler.TickCounter;
-import com.falsepattern.laggoggles.server.*;
+import com.falsepattern.laggoggles.server.RequestDataHandler;
+import com.falsepattern.laggoggles.server.RequestResultHandler;
+import com.falsepattern.laggoggles.server.ScanRequestHandler;
+import com.falsepattern.laggoggles.server.TeleportRequestHandler;
+import com.falsepattern.laggoggles.server.TeleportToTileEntityRequestHandler;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.laggoggles.util.RunInServerThread;
+
+import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -44,7 +58,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.List;
 

@@ -25,9 +25,14 @@ package com.falsepattern.laggoggles.profiler;
 
 import com.falsepattern.laggoggles.util.ThreadChecker;
 import com.falsepattern.lib.compat.BlockPos;
+
 import cpw.mods.fml.common.eventhandler.Event;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class TimingManager {

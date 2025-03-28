@@ -31,15 +31,15 @@ import com.falsepattern.laggoggles.util.Graphical;
 import com.falsepattern.laggoggles.util.RunInClientThread;
 import com.falsepattern.lib.compat.BlockPos;
 import com.falsepattern.lib.compat.ChunkPos;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
-import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

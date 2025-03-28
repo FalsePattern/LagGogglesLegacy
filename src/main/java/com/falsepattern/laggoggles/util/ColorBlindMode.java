@@ -23,7 +23,9 @@
 
 package com.falsepattern.laggoggles.util;
 
-import static com.falsepattern.laggoggles.util.Graphical.*;
+import static com.falsepattern.laggoggles.util.Graphical.BLUE_CHANNEL;
+import static com.falsepattern.laggoggles.util.Graphical.GREEN_CHANNEL;
+import static com.falsepattern.laggoggles.util.Graphical.RED_CHANNEL;
 
 public enum ColorBlindMode {
 

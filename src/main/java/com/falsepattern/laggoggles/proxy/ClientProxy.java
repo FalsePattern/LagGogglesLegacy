@@ -31,6 +31,9 @@ import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.client.gui.KeyHandler;
 import com.falsepattern.laggoggles.client.gui.LagOverlayGui;
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
+import lombok.Getter;
+
+import net.minecraft.client.Minecraft;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -38,9 +41,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
-import net.minecraft.client.Minecraft;
-
-import lombok.Getter;
 
 import static com.falsepattern.laggoggles.client.ServerDataPacketHandler.RECEIVED_RESULT;
 import static com.falsepattern.laggoggles.profiler.ProfileManager.LAST_PROFILE_RESULT;

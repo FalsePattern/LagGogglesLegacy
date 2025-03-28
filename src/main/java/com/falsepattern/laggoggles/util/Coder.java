@@ -23,8 +23,9 @@
 
 package com.falsepattern.laggoggles.util;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 import java.util.UUID;
 

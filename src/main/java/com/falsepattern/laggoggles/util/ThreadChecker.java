@@ -24,8 +24,9 @@
 package com.falsepattern.laggoggles.util;
 
 import com.falsepattern.laggoggles.profiler.TimingManager;
-import cpw.mods.fml.common.FMLCommonHandler;
+
 import net.minecraft.server.MinecraftServer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ThreadChecker {
 

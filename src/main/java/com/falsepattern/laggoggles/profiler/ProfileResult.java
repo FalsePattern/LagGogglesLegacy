@@ -28,6 +28,7 @@ import com.falsepattern.laggoggles.packet.ObjectData;
 import com.falsepattern.laggoggles.packet.SPacketScanResult;
 import com.falsepattern.laggoggles.util.Side;
 import com.falsepattern.lib.text.FormattedText;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumChatFormatting;
 

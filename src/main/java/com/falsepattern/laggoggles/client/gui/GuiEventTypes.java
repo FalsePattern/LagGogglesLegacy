@@ -32,13 +32,13 @@ import com.falsepattern.laggoggles.profiler.TimingManager;
 import com.falsepattern.laggoggles.util.Calculations;
 import com.falsepattern.laggoggles.util.Graphical;
 import com.falsepattern.laggoggles.util.Perms;
-
-import cpw.mods.fml.client.GuiScrollingList;
 import lombok.val;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
+import cpw.mods.fml.client.GuiScrollingList;
 
 import java.util.Collections;
 import java.util.TreeSet;

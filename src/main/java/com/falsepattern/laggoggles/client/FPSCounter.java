@@ -23,10 +23,9 @@
 
 package com.falsepattern.laggoggles.client;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FPSCounter {
 

@@ -33,10 +33,11 @@ import com.falsepattern.laggoggles.profiler.ProfileManager;
 import com.falsepattern.laggoggles.profiler.ScanType;
 import com.falsepattern.laggoggles.proxy.CommonProxy;
 import com.falsepattern.laggoggles.util.Perms;
+
+import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.HashMap;
 import java.util.UUID;

@@ -23,7 +23,6 @@
 
 package com.falsepattern.laggoggles.util;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
@@ -31,6 +30,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Teleport {
 

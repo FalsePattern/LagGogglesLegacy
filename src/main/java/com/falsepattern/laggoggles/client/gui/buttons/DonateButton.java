@@ -26,10 +26,11 @@ package com.falsepattern.laggoggles.client.gui.buttons;
 import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.FakeIIcon;
 import com.falsepattern.laggoggles.client.gui.GuiProfile;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 
 public class DonateButton extends SplitButton<DonateButtonSmall> {
 

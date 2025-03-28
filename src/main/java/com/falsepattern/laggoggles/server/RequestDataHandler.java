@@ -25,6 +25,7 @@ package com.falsepattern.laggoggles.server;
 
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
 import com.falsepattern.laggoggles.packet.SPacketServerData;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;

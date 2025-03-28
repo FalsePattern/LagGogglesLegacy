@@ -23,8 +23,9 @@
 
 package com.falsepattern.laggoggles.packet;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class CPacketRequestScan implements IMessage{
 

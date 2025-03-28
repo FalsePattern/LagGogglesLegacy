@@ -35,6 +35,7 @@ import com.falsepattern.laggoggles.server.ScanRequestHandler;
 import com.falsepattern.laggoggles.util.ClickableLink;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.text.FormattedText;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

@@ -24,11 +24,12 @@
 package com.falsepattern.laggoggles.mixin.mixins.common.vanilla;
 
 import com.falsepattern.lib.compat.BlockPos;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import static com.falsepattern.laggoggles.profiler.ProfileManager.PROFILE_ENABLED;
 import static com.falsepattern.laggoggles.profiler.ProfileManager.timingManager;

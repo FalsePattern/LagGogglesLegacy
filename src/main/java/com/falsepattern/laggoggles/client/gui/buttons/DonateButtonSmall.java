@@ -24,14 +24,12 @@
 package com.falsepattern.laggoggles.client.gui.buttons;
 
 import com.falsepattern.laggoggles.Main;
-import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.FakeIIcon;
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
 

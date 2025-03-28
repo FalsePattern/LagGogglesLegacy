@@ -40,14 +40,15 @@ import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.compat.GuiLabel;
 import com.falsepattern.lib.config.ConfigurationManager;
-import cpw.mods.fml.client.config.GuiConfig;
 import lombok.SneakyThrows;
 import lombok.val;
+import org.lwjgl.input.Mouse;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import org.lwjgl.input.Mouse;
+import cpw.mods.fml.client.config.GuiConfig;
 
 import java.util.ArrayList;
 import java.util.List;

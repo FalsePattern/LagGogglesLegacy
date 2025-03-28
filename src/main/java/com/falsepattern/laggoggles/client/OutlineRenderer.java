@@ -10,17 +10,18 @@ package com.falsepattern.laggoggles.client;
 
 import com.falsepattern.laggoggles.proxy.ClientProxy;
 import com.falsepattern.lib.util.RenderUtil;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import lombok.val;
 import lombok.var;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraftforge.client.event.RenderWorldEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Map;
 import java.util.WeakHashMap;

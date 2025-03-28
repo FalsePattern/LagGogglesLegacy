@@ -23,9 +23,9 @@
 
 package com.falsepattern.laggoggles.util;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public enum Side {
     DEDICATED_SERVER,

@@ -27,6 +27,7 @@ import com.falsepattern.laggoggles.Tags;
 import com.falsepattern.laggoggles.client.gui.FakeIIcon;
 import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.text.FormattedText;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

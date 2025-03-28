@@ -28,11 +28,12 @@ import com.falsepattern.laggoggles.client.gui.GuiProfile;
 import com.falsepattern.laggoggles.packet.CPacketRequestServerData;
 import com.falsepattern.laggoggles.packet.SPacketMessage;
 import com.falsepattern.lib.text.FormattedText;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import lombok.val;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessagePacketHandler implements IMessageHandler<SPacketMessage, CPacketRequestServerData> {
 
