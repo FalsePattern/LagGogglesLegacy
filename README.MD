@@ -6,7 +6,7 @@ A backport of [TerminatorNL](https://github.com/TerminatorNL)'s LagGoggles to 1.
 
 ## Dependencies
 - [FalsePatternLib](https://github.com/FalsePattern/FalsePatternLib)
-- [GasStation](https://github.com/FalsePattern/GasStation)
+- [UniMixins](https://github.com/FalsePattern/UniMixins)
 
 ## Original description:
 
