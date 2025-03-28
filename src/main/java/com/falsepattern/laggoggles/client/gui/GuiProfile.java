@@ -61,6 +61,8 @@ public class GuiProfile extends GuiScreen {
     private static final int BUTTON_DONATE           = 4;
     private static final int BUTTON_OPTIONS          = 5;
     private static final int BUTTON_DOWNLOAD         = 6;
+    private static final int BUTTON_PLUS_5           = 7;
+    private static final int BUTTON_MINUS_5          = 8;
 
     public static String PROFILING_PLAYER = null;
     public static long PROFILE_END_TIME = 0L;
@@ -109,9 +111,15 @@ public class GuiProfile extends GuiScreen {
         int centerY = height/2;
 
         boolean profileLoaded = ProfileManager.LAST_PROFILE_RESULT.get() != null;
-        int y = centerY - 25;
+        int y = centerY - (130 / 2);
+        GuiLabel scrollHint = new GuiLabel(fontRendererObj, LABEL_ID, centerX - 100, y, 200, 20, 0xFFFFFF);
+        y += 30;
         startProfile = new ProfileButton(BUTTON_START_PROFILE_ID, centerX - 100, y, I18n.format("gui.laggoggles.text.profile.start", seconds));
         downloadButton = new DownloadButton(this, BUTTON_DOWNLOAD, centerX + 80, y);
+        GuiButton minus5 = new GuiButton(BUTTON_MINUS_5, centerX - 125, y, "-5");
+        GuiButton plus5 = new GuiButton(BUTTON_PLUS_5, centerX + 105, y, "+5");
+        minus5.width = 20;
+        plus5.width = 20;
         y += 25;
         GuiButton showToggle  = new GuiButton(BUTTON_SHOW_TOGGLE, centerX - 100, y, LagOverlayGui.isShowing() ? I18n.format("gui.laggoggles.text.profile.hide") : I18n.format("gui.laggoggles.text.profile.show"));
         y += 25;
@@ -125,11 +133,12 @@ public class GuiProfile extends GuiScreen {
         showToggle.enabled = profileLoaded;
         analyzeResults.enabled = profileLoaded;
         this.buttonList.add(startProfile);
+        this.buttonList.add(plus5);
+        this.buttonList.add(minus5);
         this.buttonList.add(showToggle);
         this.buttonList.add(analyzeResults);
         this.buttonList.add(donateButton);
         this.buttonList.add(optionsButton);
-        GuiLabel scrollHint = new GuiLabel(fontRendererObj, LABEL_ID, centerX - 100, centerY - 55, 200, 20, 0xFFFFFF);
         for (val line: I18n.format("gui.laggoggles.text.profile.scrollhint", '\n').split("\n")) {
             scrollHint.addLine(line);
         }
@@ -204,18 +213,22 @@ public class GuiProfile extends GuiScreen {
         if(startProfile.mousePressed(mc, x, y) && startProfile.enabled){
             int wheel = Mouse.getDWheel();
             if(wheel != 0) {
-                seconds = seconds + ((wheel / 120) * 5); /* 1 Click is 120, 1 click is 5 seconds */
-                seconds = Math.max(seconds, 5);
-                boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
-                seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
-                if(triedMore){
-                    startProfile.displayString = I18n.format("gui.laggoggles.text.profile.limited", seconds);
-                }else {
-                    startProfile.displayString = I18n.format("gui.laggoggles.text.profile.start", seconds);
-                }
+                modifySeconds(wheel / 120); // 1 click is 120
             }
         }
         super.handleMouseInput();
+    }
+
+    private void modifySeconds(int steps) {
+        seconds = seconds + steps * 5; // 1 step is 5 seconds
+        seconds = Math.max(seconds, 5);
+        boolean triedMore = seconds > ServerDataPacketHandler.MAX_SECONDS;
+        seconds = Math.min(seconds, ServerDataPacketHandler.MAX_SECONDS);
+        if(triedMore){
+            startProfile.displayString = I18n.format("gui.laggoggles.text.profile.limited", seconds);
+        }else {
+            startProfile.displayString = I18n.format("gui.laggoggles.text.profile.start", seconds);
+        }
     }
 
     public void startProfile(){
@@ -267,6 +280,11 @@ public class GuiProfile extends GuiScreen {
             case BUTTON_DOWNLOAD:
                 ClientProxy.NETWORK_WRAPPER.sendToServer(new CPacketRequestResult());
                 break;
+            case BUTTON_PLUS_5:
+                modifySeconds(1);
+                break;
+            case BUTTON_MINUS_5:
+                modifySeconds(-1);
         }
     }
 
