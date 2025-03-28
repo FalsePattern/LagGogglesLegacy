@@ -42,7 +42,7 @@ import static com.falsepattern.laggoggles.client.gui.GuiProfile.getSecondsLeftFo
 
 public class DownloadButton extends GuiButton{
 
-    private ResourceLocation DOWNLOAD_TEXTURE = new ResourceLocation(Tags.MODID, "download.png");
+    private ResourceLocation DOWNLOAD_TEXTURE = new ResourceLocation(Tags.MOD_ID, "download.png");
     private static final IIcon icon = new FakeIIcon(14, 14);
     private final GuiScreen parent;
 

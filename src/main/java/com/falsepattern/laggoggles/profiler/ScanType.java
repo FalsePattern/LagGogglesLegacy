@@ -26,8 +26,8 @@ package com.falsepattern.laggoggles.profiler;
 import com.falsepattern.laggoggles.Tags;
 
 public enum ScanType {
-    WORLD(Tags.MODNAME + ": World scan results"),
-    FPS(Tags.MODNAME + ": FPS scan results"),
+    WORLD(Tags.MOD_NAME + ": World scan results"),
+    FPS(Tags.MOD_NAME + ": FPS scan results"),
     EMPTY("Empty profile results.");
 
     private final String text;

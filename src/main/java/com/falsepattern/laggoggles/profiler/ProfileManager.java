@@ -74,8 +74,8 @@ public class ProfileManager {
                     CommonProxy.sendTo(status, user);
                 }
             });
-            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
-            Main.LOGGER.info(Tags.MODNAME + " profiler started by " + issuer.getCommandSenderName() + " (" + seconds + " seconds)");
+            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MOD_NAME + EnumChatFormatting.WHITE + ": Profiler started for " + seconds + " seconds.").addChatMessage(issuer);
+            Main.LOGGER.info(Tags.MOD_NAME + " profiler started by " + issuer.getCommandSenderName() + " (" + seconds + " seconds)");
 
             long start = System.nanoTime();
             TickCounter.ticks.set(0L);
@@ -204,7 +204,7 @@ public class ProfileManager {
             }
             FMLCommonHandler.instance().bus().post(new LagGogglesEvent.LocalResult(LAST_PROFILE_RESULT.get()));
             Main.LOGGER.info("Profiling complete.");
-            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
+            FormattedText.parse(EnumChatFormatting.GRAY + Tags.MOD_NAME + EnumChatFormatting.WHITE + ": Profiling complete.").addChatMessage(issuer);
             return LAST_PROFILE_RESULT.get();
         } catch (Throwable e) {
             Main.LOGGER.error("Woa! Something went wrong while processing results! Please contact FalsePattern and submit the following error in an issue at github!");

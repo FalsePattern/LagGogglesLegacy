@@ -50,7 +50,7 @@ import java.util.List;
 
 public class CommonProxy {
 
-    public static final SimpleNetworkWrapper NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MODID);
+    public static final SimpleNetworkWrapper NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MOD_ID);
 
     private byte PACKET_ID = 0;
 

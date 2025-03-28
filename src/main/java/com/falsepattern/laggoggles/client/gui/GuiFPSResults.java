@@ -63,7 +63,7 @@ public class GuiFPSResults extends GuiScreen{
         guiSingleEntities.drawScreen(mouseX, mouseY, partialTicks);
         guiEntityTypes.drawScreen(mouseX, mouseY, partialTicks);
         guiEventTypes.drawScreen(mouseX, mouseY, partialTicks);
-        drawString(Tags.MODNAME + ": " + I18n.format("gui.laggoggles.text.fpsresults.titledescription"), 5, 5, 0xFFFFFF);
+        drawString(Tags.MOD_NAME + ": " + I18n.format("gui.laggoggles.text.fpsresults.titledescription"), 5, 5, 0xFFFFFF);
         drawString(I18n.format("gui.laggoggles.text.fpsresults.present"), 5, 15, 0xCCCCCC);
         drawString(I18n.format("gui.laggoggles.text.results.singleentities"), 5, 35, 0xFFFFFF);
         drawString(" (" + I18n.format("gui.laggoggles.text.results.teleport") + ")", 5 + FONTRENDERER.getStringWidth(I18n.format("gui.laggoggles.text.results.singleentities")), 35, 0x666666);

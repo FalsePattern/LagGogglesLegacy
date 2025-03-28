@@ -34,20 +34,20 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Tags.MODID,
-     name = Tags.MODNAME,
-     version = Tags.VERSION,
+@Mod(modid = Tags.MOD_ID,
+     name = Tags.MOD_NAME,
+     version = Tags.MOD_VERSION,
      acceptedMinecraftVersions = "[1.7.10]",
      acceptableRemoteVersions = "*",
-     guiFactory = Tags.GROUPNAME + ".client.gui.ConfigGuiFactory",
+     guiFactory = Tags.ROOT_PKG + ".client.gui.ConfigGuiFactory",
      dependencies = "required-after:falsepatternlib@[1.2.0,)")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
     public static Logger LOGGER;
 
     @SidedProxy(
-            serverSide = Tags.GROUPNAME + ".proxy.ServerProxy",
-            clientSide = Tags.GROUPNAME + ".proxy.ClientProxy"
+            serverSide = Tags.ROOT_PKG + ".proxy.ServerProxy",
+            clientSide = Tags.ROOT_PKG + ".proxy.ClientProxy"
     )
     public static CommonProxy proxy;
 

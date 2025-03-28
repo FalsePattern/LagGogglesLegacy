@@ -32,7 +32,7 @@ import com.falsepattern.laggoggles.profiler.TimingManager;
 import com.falsepattern.laggoggles.util.Calculations;
 import com.falsepattern.laggoggles.util.Graphical;
 import com.falsepattern.laggoggles.util.Perms;
-import com.falsepattern.lib.text.FormattedText;
+
 import cpw.mods.fml.client.GuiScrollingList;
 import lombok.val;
 import net.minecraft.client.Minecraft;
@@ -63,7 +63,7 @@ public class GuiEventTypes extends GuiScrollingList {
 
 
                     /* This removes the LagGoggles tooltip from the results, as it's only visible while profiling, it's clutter. */
-                    if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_LISTENER).contains(Tags.MODID)){
+                    if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_LISTENER).contains(Tags.MOD_ID)){
                         if(src.data.<String>getValue(ObjectData.Entry.EVENT_BUS_EVENT_CLASS_NAME).equals(Graphical.formatClassName(net.minecraftforge.client.event.RenderGameOverlayEvent.Post.class.toString()))) {
                             continue;
                         }

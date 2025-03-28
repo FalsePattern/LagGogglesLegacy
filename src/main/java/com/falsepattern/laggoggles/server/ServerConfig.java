@@ -28,7 +28,7 @@ import com.falsepattern.laggoggles.util.Perms;
 import com.falsepattern.lib.config.Config;
 import com.falsepattern.lib.config.ConfigurationManager;
 
-@Config(modid = Tags.MODID, category = "server")
+@Config(modid = Tags.MOD_ID, category = "server")
 public class ServerConfig {
 
     @Config.Comment("What's the permission level available to non-operators (Normal players)?\n" +

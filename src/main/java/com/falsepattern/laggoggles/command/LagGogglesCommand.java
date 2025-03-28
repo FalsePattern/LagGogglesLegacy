@@ -51,7 +51,7 @@ public class LagGogglesCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return Tags.MODID;
+        return Tags.MOD_ID;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class LagGogglesCommand extends CommandBase {
                 @Override
                 public void run() {
                     Profiler.runProfiler(seconds, ScanType.WORLD, sender);
-                    FormattedText.parse(EnumChatFormatting.GRAY + Tags.MODNAME + EnumChatFormatting.WHITE + ": You can see results using /" + getCommandName() + " dump").addChatMessage(sender);
+                    FormattedText.parse(EnumChatFormatting.GRAY + Tags.MOD_NAME + EnumChatFormatting.WHITE + ": You can see results using /" + getCommandName() + " dump").addChatMessage(sender);
                 }
             }).start();
             return;
@@ -92,7 +92,7 @@ public class LagGogglesCommand extends CommandBase {
             dump(sender);
             return;
         }
-        FormattedText.parse(EnumChatFormatting.GRAY + "Running LagGoggles version: " + EnumChatFormatting.GREEN + Tags.VERSION).addChatMessage(sender);
+        FormattedText.parse(EnumChatFormatting.GRAY + "Running LagGoggles version: " + EnumChatFormatting.GREEN + Tags.MOD_VERSION).addChatMessage(sender);
         sender.addChatMessage(ClickableLink.getLink("https://minecraft.curseforge.com/projects/laggoggles"));
         sender.addChatMessage(new ChatComponentText(""));
         FormattedText.parse(EnumChatFormatting.GRAY + "Available arguments:").addChatMessage(sender);

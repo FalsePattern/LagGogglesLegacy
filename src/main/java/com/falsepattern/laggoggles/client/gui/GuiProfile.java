@@ -262,7 +262,7 @@ public class GuiProfile extends GuiScreen {
                 donateButton.click(this, buttonList, x, y);
                 break;
             case BUTTON_OPTIONS:
-                mc.displayGuiScreen(new GuiConfig(this, ConfigurationManager.getConfigElements(ClientConfig.class), Tags.MODID, false, false, Tags.MODNAME + " Configuration", "Hover with the mouse over a variable to see a description"));
+                mc.displayGuiScreen(new GuiConfig(this, ConfigurationManager.getConfigElements(ClientConfig.class), Tags.MOD_ID, false, false, Tags.MOD_NAME + " Configuration", "Hover with the mouse over a variable to see a description"));
                 break;
             case BUTTON_DOWNLOAD:
                 ClientProxy.NETWORK_WRAPPER.sendToServer(new CPacketRequestResult());

@@ -32,6 +32,6 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class ConfigGui extends SimpleGuiConfig {
     public ConfigGui(GuiScreen parentScreen) throws ConfigException {
-        super(parentScreen, Tags.MODID, Tags.MODNAME, ClientConfig.class);
+        super(parentScreen, Tags.MOD_ID, Tags.MOD_NAME, ClientConfig.class);
     }
 }
