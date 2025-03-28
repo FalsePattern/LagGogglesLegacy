@@ -40,7 +40,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
      acceptedMinecraftVersions = "[1.7.10]",
      acceptableRemoteVersions = "*",
      guiFactory = Tags.ROOT_PKG + ".client.gui.ConfigGuiFactory",
-     dependencies = "required-after:falsepatternlib@[1.2.0,)")
+     dependencies = "required-after:falsepatternlib@[1.5.9,)")
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class Main {
     public static Logger LOGGER;

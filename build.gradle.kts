@@ -50,6 +50,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.falsepattern:falsepatternlib-mc1.7.10:1.2.4:dev")
+    implementation("com.falsepattern:falsepatternlib-mc1.7.10:1.5.9:dev")
     compileOnly(deobfCurse("dragonapi-235591:4722480"))
 }
